@@ -15,14 +15,14 @@ public class Player {
         this.gold -= item.getPrice();
         this.inventory.add(item);
     }
+    public List<Item> getInventory() { return inventory; }
+
     public boolean addItem(Item item){
         return inventory.add(item);
     }
-
     public boolean removeItem(Item item){
         return inventory.remove(item);
     }
-
     public String showInventory(){
         StringBuilder str = new StringBuilder("||    INVENTARIO     ||");
         for(Item item : inventory){
@@ -31,8 +31,5 @@ public class Player {
         }
         return str.toString();
     }
-
-
-
 
 }
