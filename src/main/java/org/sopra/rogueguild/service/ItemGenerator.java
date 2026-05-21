@@ -83,29 +83,13 @@ public class ItemGenerator {
     }
     private String generateName(){
         String nameAux = null;
-        int randNumPrefix;
         int randNumSufix = (int) RandNumGenerator.generate(1,27);
         switch (category){
-            case ItemCategory.WEAPON -> {
-                randNumPrefix = (int) RandNumGenerator.generate(1,8);
-                nameAux = WEAPON_PREFIXES.get(randNumPrefix);
-            }
-            case ItemCategory.ARMOR -> {
-                randNumPrefix = (int) RandNumGenerator.generate(1,5);
-                nameAux = ARMOR_PREFIXES.get(randNumPrefix);
-            }
-            case ItemCategory.BOOTS -> {
-                randNumPrefix = (int) RandNumGenerator.generate(1,4);
-                nameAux = BOOTS_PREFIXES.get(randNumPrefix);
-            }
-            case ItemCategory.HELMET -> {
-                randNumPrefix = (int) RandNumGenerator.generate(1,5);
-                nameAux = HELMET_PREFIXES.get(randNumPrefix);
-            }
-            case ItemCategory.POTION -> {
-                randNumPrefix = (int) RandNumGenerator.generate(1,5);
-                nameAux = POTION_PREFIXES.get(randNumPrefix);
-            }
+            case ItemCategory.WEAPON -> nameAux = WEAPON_PREFIXES.get( RandNumGenerator.generateInt(1,8));
+            case ItemCategory.ARMOR -> nameAux = ARMOR_PREFIXES.get( RandNumGenerator.generateInt(1,5));
+            case ItemCategory.BOOTS -> nameAux = BOOTS_PREFIXES.get(RandNumGenerator.generateInt(1,4));
+            case ItemCategory.HELMET -> nameAux = HELMET_PREFIXES.get(RandNumGenerator.generateInt(1,5));
+            case ItemCategory.POTION -> nameAux = POTION_PREFIXES.get(RandNumGenerator.generateInt(1,5));
         }
         nameAux += (" " + SUFFIXES.get(randNumSufix));
 
