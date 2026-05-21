@@ -1,7 +1,8 @@
 package org.sopra.rogueguild.controller;
 
 import java.util.Scanner;
-
+import org.sopra.rogueguild.controller.dto.SellResponse;
+import java.util.List;
 import org.sopra.rogueguild.repository.ShopRepository;
 import org.sopra.rogueguild.repository.model.Item;
 import org.sopra.rogueguild.repository.model.Player;
@@ -38,7 +39,8 @@ public class ShopController {
                     view.buyResult(buyResponse);
                     break;
                 case 3:
-                    // TODO Logic to sell and add products to stock
+                    SellResponse sellResponse = sellProcess();
+                    view.sellResult(sellResponse);
                     break;
                 case 4:
                     // TODO Logic to ...
@@ -46,9 +48,9 @@ public class ShopController {
                 case 0:
                     view.quitMessage();
                     break;
-                }
-                view.pressKeyMessage();
-                sc.nextLine();
+            }
+            view.pressKeyMessage();
+            sc.nextLine();
         } while (opt != 0);
     }
 
@@ -65,7 +67,31 @@ public class ShopController {
         return BuyResponse.success(item);
     }
 
-    private void sellProcess(Item item) {
-        //TODO Sell process
+    private SellResponse sellProcess() {
+        List<Item> inventory = player.getInventory();
+        if (inventory.isEmpty()) {
+            return SellResponse.emptyInventory();
+        }
+        view.displayInventoryForSale(player);
+        int choice;
+        try {
+            choice = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            return SellResponse.notFound();
+        }
+        if (choice < 1 || choice > inventory.size()) {
+            return SellResponse.notFound();
+        }
+        Item item = inventory.get(choice - 1);
+        int goldReceived = calcSellPrice(item.getBasePrice());
+        player.removeItem(item);
+        player.receiveGold(goldReceived);
+        repository.addItem(item);
+        return SellResponse.success(item, goldReceived);
+    }
+
+    private int calcSellPrice(int basePrice) {
+        int raw = (int) Math.round(basePrice * 0.8);
+        return (int) (Math.round(raw / 5.0) * 5);
     }
 }

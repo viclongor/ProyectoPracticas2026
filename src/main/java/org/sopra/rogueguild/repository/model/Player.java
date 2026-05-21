@@ -11,11 +11,10 @@ public class Player {
     }
     public String getName() { return name; }
     public int getGold() { return gold; }
-    public void buy(Item item) {
-        this.gold -= item.getPrice();
-        this.inventory.add(item);
-    }
     public List<Item> getInventory() { return inventory; }
+
+    public void buy(Item item) { this.gold -= item.getPrice(); addItem(item); }
+    public void receiveGold(int amount) { this.gold += amount; }
 
     public boolean addItem(Item item){
         return inventory.add(item);
@@ -23,6 +22,7 @@ public class Player {
     public boolean removeItem(Item item){
         return inventory.remove(item);
     }
+
     public String showInventory(){
         StringBuilder str = new StringBuilder("||    INVENTARIO     ||");
         for(Item item : inventory){

@@ -1,7 +1,8 @@
 package org.sopra.rogueguild.view;
 import java.io.PrintStream;
 import java.util.Map;
-
+import org.sopra.rogueguild.controller.dto.SellResponse;
+import org.sopra.rogueguild.view.components.SellResultView;
 import org.sopra.rogueguild.repository.model.Item;
 import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.controller.dto.BuyResponse;
@@ -17,6 +18,8 @@ public class ViewDisplay {
     private final PlayerView playerView;
     private final StockView stockView;
     private final BuyResultView buyResultView;
+    private final SellResultView sellResultView;
+
 
     public ViewDisplay() {
         this(System.out, 59);
@@ -28,6 +31,7 @@ public class ViewDisplay {
         this.playerView = new PlayerView(out);
         this.stockView = new StockView(out);
         this.buyResultView = new BuyResultView(messages);
+        this.sellResultView = new SellResultView(messages);
     }
 
     public void landingPage() { banner.landingPage(); }
@@ -45,4 +49,9 @@ public class ViewDisplay {
     public void buyResult(BuyResponse r) {
         buyResultView.show(r);
     }
+
+    public void displayInventoryForSale(Player player) {
+        playerView.displayInventoryForSale(player);
+    }
+    public void sellResult(SellResponse r) { sellResultView.show(r); }
 }
