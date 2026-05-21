@@ -15,9 +15,11 @@ public class Player {
     public boolean addItem(Item item){
         return inventory.add(item);
     }
+
     public boolean removeItem(Item item){
         return inventory.remove(item);
     }
+
     public String showInventory(){
         StringBuilder str = new StringBuilder("||    INVENTARIO     ||");
         for(Item item : inventory){
