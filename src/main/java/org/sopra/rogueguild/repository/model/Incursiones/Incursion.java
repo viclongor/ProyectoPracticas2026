@@ -22,7 +22,7 @@ public abstract class Incursion {
         ItemGenerator itemGenerator = new ItemGenerator();
         do{
             potentialItem = itemGenerator.generate();
-        }while(itemReward.getBasePrice()<50);
+        }while(potentialItem.getBasePrice()<50);
         return potentialItem;
     }
     public Item generateSmallItemReward(){
@@ -30,7 +30,7 @@ public abstract class Incursion {
         ItemGenerator itemGenerator = new ItemGenerator();
         do{
             potentialItem = itemGenerator.generate();
-        }while(itemReward.getBasePrice()>50);
+        }while(potentialItem.getBasePrice()>50);
         return potentialItem;
     }
     public int generateBigGoldReward(){

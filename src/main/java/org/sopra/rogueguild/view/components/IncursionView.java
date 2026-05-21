@@ -28,16 +28,16 @@ public class IncursionView {
     }
     public void displayIncursionResults(RewardBag rewardBag){
         out.println("  ___________________________________________________");
-        out.println(" /  _______________________________________________  \\");
-        out.println("|| /                                               \\ ||");
-        out.println("|| |          RECOMPENSAS DE LA INCURSION          | ||");
-        out.println("|| | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ | ||");
-        out.println("|| |                                               | ||");
-        out.println("|| |    Has encontrado: "+rewardBag.getGold()+" Oro y                                           | ||");
-        out.println("|| |         el objeto: "+rewardBag.getItem()+"                                           | ||");
-        out.println("|| |                                               | ||");
-        out.println("|| \\_______________________________________________/ ||");
-        out.println(" \\___________________________________________________/");
+        out.println(" /  _______________________________________________ \\");
+        out.println("|| /                                               ");
+        out.println("|| |          RECOMPENSAS DE LA INCURSION          ");
+        out.println("|| | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ");
+        out.println("||");
+        out.println("||    Has encontrado: "+rewardBag.getGold()+" Oro y el objeto:");
+        out.println("||    "+rewardBag.getItem()+"");
+        out.println("||");
+        out.println("||");
+        out.println(" \\__________________________________________________/");
     }
 
 }

@@ -2,15 +2,11 @@ package org.sopra.rogueguild.view;
 import java.io.PrintStream;
 import java.util.Map;
 import org.sopra.rogueguild.controller.dto.SellResponse;
-import org.sopra.rogueguild.view.components.SellResultView;
+import org.sopra.rogueguild.repository.model.RewardBag;
+import org.sopra.rogueguild.view.components.*;
 import org.sopra.rogueguild.repository.model.Item;
 import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.controller.dto.BuyResponse;
-import org.sopra.rogueguild.view.components.BannerView;
-import org.sopra.rogueguild.view.components.BuyResultView;
-import org.sopra.rogueguild.view.components.MessageView;
-import org.sopra.rogueguild.view.components.PlayerView;
-import org.sopra.rogueguild.view.components.StockView;
 import org.sopra.rogueguild.repository.model.WorldEvent;
 
 

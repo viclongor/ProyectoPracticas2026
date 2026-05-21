@@ -85,14 +85,14 @@ public class ItemGenerator {
     }
     private String generateName(){
         String nameAux = null;
-        int randNumSufix = (int) NumUtil.generate(1,suffixes.size());
+        int randNumSufix = (int) NumUtil.generate(0,suffixes.size()-1);
 
         switch (category){
-            case ItemCategory.WEAPON -> nameAux = weaponPrefixes.remove( NumUtil.generateInt(1,weaponPrefixes.size()));
-            case ItemCategory.ARMOR -> nameAux = armorPrefixes.remove( NumUtil.generateInt(1,armorPrefixes.size()));
-            case ItemCategory.BOOTS -> nameAux = bootsPrefixes.remove(NumUtil.generateInt(1,bootsPrefixes.size()));
-            case ItemCategory.HELMET -> nameAux = helmetPrefixes.remove(NumUtil.generateInt(1,helmetPrefixes.size()));
-            case ItemCategory.POTION -> nameAux = potionPrefixes.remove(NumUtil.generateInt(1,potionPrefixes.size()));
+            case ItemCategory.WEAPON -> nameAux = weaponPrefixes.remove( NumUtil.generateInt(0,weaponPrefixes.size()-1));
+            case ItemCategory.ARMOR -> nameAux = armorPrefixes.remove( NumUtil.generateInt(0,armorPrefixes.size()-1));
+            case ItemCategory.BOOTS -> nameAux = bootsPrefixes.remove(NumUtil.generateInt(0,bootsPrefixes.size()-1));
+            case ItemCategory.HELMET -> nameAux = helmetPrefixes.remove(NumUtil.generateInt(0,helmetPrefixes.size()-1));
+            case ItemCategory.POTION -> nameAux = potionPrefixes.remove(NumUtil.generateInt(0,potionPrefixes.size()-1));
         }
         nameAux += (" " + suffixes.remove(randNumSufix));
 
