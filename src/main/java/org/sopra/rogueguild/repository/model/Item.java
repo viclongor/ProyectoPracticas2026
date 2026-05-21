@@ -15,5 +15,8 @@ public abstract class Item {
 
     public String getName() { return name; }
     public int getPrice() { return price; }
+    public int getBasePrice()           { return basePrice; }
+    public ItemCategory getCategory()   { return category; }
+
     public String toString() { return name + " (" + price + " oro)"; }
 }

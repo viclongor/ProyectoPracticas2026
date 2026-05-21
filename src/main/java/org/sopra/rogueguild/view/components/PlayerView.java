@@ -34,4 +34,27 @@ public class PlayerView {
         out.println("       | ░    INVENTARIO:    "+inventario);
         out.println();
     }
+    public void displayInventoryForSale(Player player) {
+        List<Item> inv = player.getInventory();
+        out.println("  ___________________________________________________");
+        out.println(" /  _______________________________________________  \\");
+        out.println("|| /                                               \\ ||");
+        out.println("|| |            INVENTARIO DEL JUGADOR             | ||");
+        out.println("|| | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ | ||");
+        out.println("|| |                                               | ||");
+        for (int i = 0; i < inv.size(); i++) {
+            Item item = inv.get(i);
+            int sellPrice = calcSellPrice(item.getBasePrice());
+            out.printf("|| |  [%d] %-28s %4d oro    | ||%n",
+                    i + 1, item.getName(), sellPrice);
+        }
+        out.println("|| |                                               | ||");
+        out.println("|| \\_______________________________________________/ ||");
+        out.println(" \\___________________________________________________/");
+    }
+
+    private int calcSellPrice(int basePrice) {
+        int raw = (int) Math.round(basePrice * 0.8);
+        return (int) (Math.round(raw / 5.0) * 5);
+    }
 }
