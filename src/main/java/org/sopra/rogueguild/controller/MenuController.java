@@ -15,14 +15,14 @@ import org.sopra.rogueguild.controller.dto.BuyResponse;
 import org.sopra.rogueguild.repository.model.WorldEvent;
 import org.sopra.rogueguild.service.WorldEventGenerator;
 
-public class ShopController {
+public class MenuController {
     private final Player player;
     private final ViewDisplay view;
     private final ShopRepository repository;
     private final Scanner sc;
     private final WorldEventGenerator eventGenerator;
 
-    public ShopController(Player p, ViewDisplay v, ShopRepository r) {
+    public MenuController(Player p, ViewDisplay v, ShopRepository r) {
         this.player = p;
         this.view = v;
         this.repository = r;

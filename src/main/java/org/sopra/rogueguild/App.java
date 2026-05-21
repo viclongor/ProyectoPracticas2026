@@ -1,6 +1,6 @@
 package org.sopra.rogueguild;
 
-import org.sopra.rogueguild.controller.ShopController;
+import org.sopra.rogueguild.controller.MenuController;
 import org.sopra.rogueguild.repository.ShopRepository;
 import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.view.ViewDisplay;
@@ -12,7 +12,7 @@ public class App {
 
         Player player = new Player( "Iñigo Montolla", 500);
 
-        ShopController controller = new ShopController(player, view, repository);
+        MenuController controller = new MenuController(player, view, repository);
         controller.start();
     }
 }

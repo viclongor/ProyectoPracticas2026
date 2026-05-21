@@ -27,6 +27,13 @@ public class IncursionView {
                 """);
     }
     public void displayIncursionResults(RewardBag rewardBag){
+        String item = "";
+        if(rewardBag.getItem() != null) {
+            item = rewardBag.getItem().toString();
+        } else{
+            item = "nada";
+        }
+
         out.println("  ___________________________________________________");
         out.println(" /  _______________________________________________ \\");
         out.println("|| /                                               ");
@@ -34,7 +41,7 @@ public class IncursionView {
         out.println("|| | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ");
         out.println("||");
         out.println("||    Has encontrado: "+rewardBag.getGold()+" Oro y el objeto:");
-        out.println("||    "+rewardBag.getItem()+"");
+        out.println("||    "+item+"");
         out.println("||");
         out.println("||");
         out.println(" \\__________________________________________________/");
