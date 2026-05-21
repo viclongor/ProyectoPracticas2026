@@ -1,8 +1,7 @@
 package org.sopra.rogueguild.service;
 
 import org.sopra.rogueguild.repository.model.*;
-import util.RandNumGenerator;
-
+import util.NumMalipulator;
 import java.util.List;
 
 public class ItemGenerator {
@@ -43,25 +42,25 @@ public class ItemGenerator {
         price = generateRandomPrice();
 
         switch (category){
-            case ItemCategory.WEAPON -> {
+            case WEAPON -> {
 
-                return new Weapon(name, price,(int)RandNumGenerator.generate(5,100));
+                return new Weapon(name, price,(int) NumMalipulator.generate(5,100));
             }
-            case ItemCategory.ARMOR -> {
+            case ARMOR -> {
 
-                return new Armor(name, price,(int)RandNumGenerator.generate(5,100));
+                return new Armor(name, price,(int) NumMalipulator.generate(5,100));
             }
-            case ItemCategory.BOOTS -> {
+            case BOOTS -> {
 
-                return new Boots(name, price,(int)RandNumGenerator.generate(5,100));
+                return new Boots(name, price,(int) NumMalipulator.generate(5,100));
             }
-            case ItemCategory.HELMET -> {
+            case HELMET -> {
 
-                return new Helmet(name, price,(int)RandNumGenerator.generate(5,100));
+                return new Helmet(name, price,(int) NumMalipulator.generate(5,100));
             }
-            case ItemCategory.POTION -> {
+            case POTION -> {
 
-                return new Potion(name, price,"test",(int)RandNumGenerator.generate(5,100));
+                return new Potion(name, price,"test",(int) NumMalipulator.generate(5,100));
             }
             default -> {
                 return null;
@@ -72,31 +71,32 @@ public class ItemGenerator {
     private int generateRandomPrice(){
         int priceAux = 0;
         switch (category){
-            case ItemCategory.WEAPON -> priceAux =  (int) RandNumGenerator.generate(50 ,200);
-            case ItemCategory.ARMOR -> priceAux = (int) RandNumGenerator.generate(20 ,100);
-            case ItemCategory.BOOTS -> priceAux = (int) RandNumGenerator.generate(20 ,150);
-            case ItemCategory.HELMET -> priceAux = (int) RandNumGenerator.generate(100 ,300);
-            case ItemCategory.POTION -> priceAux = (int) RandNumGenerator.generate(10 ,40);
+            case WEAPON -> priceAux =  (int) NumMalipulator.generate(50 ,200);
+            case ARMOR -> priceAux = (int) NumMalipulator.generate(20 ,100);
+            case BOOTS -> priceAux = (int) NumMalipulator.generate(20 ,150);
+            case HELMET -> priceAux = (int) NumMalipulator.generate(100 ,300);
+            case POTION -> priceAux = (int) NumMalipulator.generate(10 ,40);
         }
-        priceAux = RandNumGenerator.roundTo5(priceAux);
+        priceAux = NumMalipulator.roundTo5(priceAux);
         return priceAux;
     }
     private String generateName(){
         String nameAux = null;
-        int randNumSufix = (int) RandNumGenerator.generate(1,27);
+        int randNumSufix = (int) NumMalipulator.generate(1,27);
+
         switch (category){
-            case ItemCategory.WEAPON -> nameAux = WEAPON_PREFIXES.get( RandNumGenerator.generateInt(1,8));
-            case ItemCategory.ARMOR -> nameAux = ARMOR_PREFIXES.get( RandNumGenerator.generateInt(1,5));
-            case ItemCategory.BOOTS -> nameAux = BOOTS_PREFIXES.get(RandNumGenerator.generateInt(1,4));
-            case ItemCategory.HELMET -> nameAux = HELMET_PREFIXES.get(RandNumGenerator.generateInt(1,5));
-            case ItemCategory.POTION -> nameAux = POTION_PREFIXES.get(RandNumGenerator.generateInt(1,5));
+            case ItemCategory.WEAPON -> nameAux = WEAPON_PREFIXES.get( NumMalipulator.generateInt(1,8));
+            case ItemCategory.ARMOR -> nameAux = ARMOR_PREFIXES.get( NumMalipulator.generateInt(1,5));
+            case ItemCategory.BOOTS -> nameAux = BOOTS_PREFIXES.get(NumMalipulator.generateInt(1,4));
+            case ItemCategory.HELMET -> nameAux = HELMET_PREFIXES.get(NumMalipulator.generateInt(1,5));
+            case ItemCategory.POTION -> nameAux = POTION_PREFIXES.get(NumMalipulator.generateInt(1,5));
         }
         nameAux += (" " + SUFFIXES.get(randNumSufix));
 
         return nameAux;
     }
     private ItemCategory genertateItemType(){
-        int randNum = (int) RandNumGenerator.generate(1,5);
+        int randNum = (int) NumMalipulator.generate(1,5);
         ItemCategory categoryAux = null;
         switch (randNum){
             case 1 -> categoryAux = ItemCategory.WEAPON;

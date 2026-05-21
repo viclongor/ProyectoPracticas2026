@@ -1,6 +1,6 @@
 package util;
 
-public class RandNumGenerator {
+public class NumMalipulator {
     public static double generate(int min, int max){
         return (Math.random()*max)+min;
     }
