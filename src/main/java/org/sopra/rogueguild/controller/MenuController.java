@@ -14,6 +14,9 @@ import org.sopra.rogueguild.view.ViewDisplay;
 import org.sopra.rogueguild.controller.dto.BuyResponse;
 import org.sopra.rogueguild.repository.model.WorldEvent;
 import org.sopra.rogueguild.service.WorldEventGenerator;
+import util.Input;
+
+import javax.crypto.spec.PSource;
 
 public class MenuController {
     private final Player player;
@@ -39,14 +42,14 @@ public class MenuController {
             view.landingPage();
             view.showWorldEvent(event);
             view.playerStatus(player);
-            opt = Integer.parseInt(sc.nextLine());
+            opt = Input.getInt();
             switch (opt) {
                 case 1:
                     view.displayStock(repository.getAllStock(), false);
                     break;
                 case 2:
                     view.displayStock(repository.getAllStock(), true);
-                    int itemId = Integer.parseInt(sc.nextLine());
+                    int itemId = Input.getInt();
                     BuyResponse buyResponse = buyProcess(itemId);
                     view.buyResult(buyResponse);
                     break;
@@ -56,20 +59,23 @@ public class MenuController {
                     break;
                 case 4:
                     view.showIncursions();
-                    int id = Integer.parseInt(sc.nextLine());
-                    selectIncursion(id);
+                    int incursionId = Input.getInt();
+                    selectIncursion(incursionId);
                     break;
                 case 0:
                     view.quitMessage();
+                    break;
+                default:
+                    System.out.println("Tienes que escribir un numero valido");
                     break;
             }
             view.pressKeyMessage();
             sc.nextLine();
         } while (opt != 0);
     }
-    private void selectIncursion(int id){
+    private void selectIncursion(int incursionId){
         RewardBag rewardBag = null;
-        switch (id){
+        switch (incursionId){
             case 1->{
                 ConquestIncursion conquestIncursion = new ConquestIncursion("El Santuario olvidado", "Ardua incursion que seguro que aporta objetos caros");
                 rewardBag = conquestIncursion.completeQuest();
