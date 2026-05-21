@@ -3,10 +3,11 @@ package org.sopra.rogueguild.repository;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.sopra.rogueguild.repository.model.WorldEvent;
-import util.NumMalipulator;
+import util.NumUtil;
 import org.sopra.rogueguild.repository.model.Armor;
 import org.sopra.rogueguild.repository.model.Item;
 import org.sopra.rogueguild.repository.model.Weapon;
+import util.NumUtil;
 
 public class ShopRepository {
     private Map<Integer, Item> stock;
@@ -40,7 +41,7 @@ public class ShopRepository {
             boolean affected = event.isGlobal()
                     || item.getCategory() == event.getAffectedCategory();
             if (affected) {
-                int newPrice = NumMalipulator.roundTo5(item.getBasePrice() * event.getFactor());
+                int newPrice = NumUtil.roundTo5(item.getBasePrice() * event.getFactor());
                 item.setPrice(newPrice);
             }
         }

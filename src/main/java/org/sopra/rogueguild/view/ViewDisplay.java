@@ -2,15 +2,11 @@ package org.sopra.rogueguild.view;
 import java.io.PrintStream;
 import java.util.Map;
 import org.sopra.rogueguild.controller.dto.SellResponse;
-import org.sopra.rogueguild.view.components.SellResultView;
+import org.sopra.rogueguild.repository.model.RewardBag;
+import org.sopra.rogueguild.view.components.*;
 import org.sopra.rogueguild.repository.model.Item;
 import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.controller.dto.BuyResponse;
-import org.sopra.rogueguild.view.components.BannerView;
-import org.sopra.rogueguild.view.components.BuyResultView;
-import org.sopra.rogueguild.view.components.MessageView;
-import org.sopra.rogueguild.view.components.PlayerView;
-import org.sopra.rogueguild.view.components.StockView;
 import org.sopra.rogueguild.repository.model.WorldEvent;
 
 
@@ -21,6 +17,7 @@ public class ViewDisplay {
     private final StockView stockView;
     private final BuyResultView buyResultView;
     private final SellResultView sellResultView;
+    private final IncursionView incursionView;
 
 
     public ViewDisplay() {
@@ -34,6 +31,7 @@ public class ViewDisplay {
         this.stockView = new StockView(out);
         this.buyResultView = new BuyResultView(messages);
         this.sellResultView = new SellResultView(messages);
+        this.incursionView = new IncursionView(out);
     }
 
     public void landingPage() { banner.landingPage(); }
@@ -60,4 +58,7 @@ public class ViewDisplay {
         messages.showMessage("** EVENTO DEL MUNDO **");
         messages.showMessage(event.getDescription());
     }
+
+    public void showIncursions(){incursionView.displayAvailableIncursions();}
+    public void showIncursionResult(RewardBag rewardBag){incursionView.displayIncursionResults(rewardBag);}
 }
