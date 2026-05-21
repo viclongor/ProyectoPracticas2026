@@ -2,7 +2,7 @@ package org.sopra.rogueguild.service;
 
 import org.sopra.rogueguild.repository.model.ItemCategory;
 import org.sopra.rogueguild.repository.model.WorldEvent;
-import util.NumMalipulator;
+import util.NumUtil;
 
 import java.util.List;
 
@@ -65,16 +65,16 @@ public class WorldEventGenerator {
     }
 
     public WorldEvent generate() {
-        boolean isGlobal = NumMalipulator.generateInt(0, 2) == 0;
+        boolean isGlobal = NumUtil.generateInt(0, 2) == 0;
 
         ItemCategory category = null;
         if (!isGlobal) {
-            int idx = Math.min(NumMalipulator.generateInt(0, ELIGIBLE_CATEGORIES.size()),
+            int idx = Math.min(NumUtil.generateInt(0, ELIGIBLE_CATEGORIES.size()),
                     ELIGIBLE_CATEGORIES.size() - 1);
             category = ELIGIBLE_CATEGORIES.get(idx);
         }
 
-        int varIdx = Math.min(NumMalipulator.generateInt(0, VARIATIONS.length),
+        int varIdx = Math.min(NumUtil.generateInt(0, VARIATIONS.length),
                 VARIATIONS.length - 1);
         double factor   = VARIATIONS[varIdx][0];
         int    pct      = (int) Math.abs(VARIATIONS[varIdx][1]);
@@ -88,11 +88,11 @@ public class WorldEventGenerator {
                                     boolean isUp, int pct) {
         if (isGlobal) {
             List<String> t = isUp ? GLOBAL_UP : GLOBAL_DOWN;
-            int idx = Math.min(NumMalipulator.generateInt(0, t.size()), t.size() - 1);
+            int idx = Math.min(NumUtil.generateInt(0, t.size()), t.size() - 1);
             return String.format(t.get(idx), pct);
         } else {
             List<String> t = isUp ? CATEGORY_UP : CATEGORY_DOWN;
-            int idx = Math.min(NumMalipulator.generateInt(0, t.size()), t.size() - 1);
+            int idx = Math.min(NumUtil.generateInt(0, t.size()), t.size() - 1);
             return String.format(t.get(idx), categoryLabel(category), pct);
         }
     }

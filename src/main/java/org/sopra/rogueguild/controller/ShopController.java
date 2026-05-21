@@ -4,6 +4,9 @@ import java.util.Scanner;
 import org.sopra.rogueguild.controller.dto.SellResponse;
 import java.util.List;
 import org.sopra.rogueguild.repository.ShopRepository;
+import org.sopra.rogueguild.repository.model.Incursiones.ConquestIncursion;
+import org.sopra.rogueguild.repository.model.Incursiones.PillageIncursion;
+import org.sopra.rogueguild.repository.model.Incursiones.SmallIncursion;
 import org.sopra.rogueguild.repository.model.Item;
 import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.view.ViewDisplay;
@@ -51,7 +54,9 @@ public class ShopController {
                     view.sellResult(sellResponse);
                     break;
                 case 4:
-                    // TODO Logic to ...
+                    view.showIncursions();
+                    int id = Integer.parseInt(sc.nextLine());
+                    selectIncursion(id);
                     break;
                 case 0:
                     view.quitMessage();
@@ -61,7 +66,22 @@ public class ShopController {
             sc.nextLine();
         } while (opt != 0);
     }
-
+    private void selectIncursion(int id){
+        switch (id){
+            case 1->{
+                ConquestIncursion conquestIncursion = new ConquestIncursion("El Santuario olvidado", "Ardua incursion que seguro que aporta objetos caros");
+                view.showIncursionResult(conquestIncursion.completeQuest());
+            }
+            case 2->{
+                PillageIncursion pillageIncursion = new PillageIncursion("La ciudad prohibida", "Ardua incursion que seguro que aporta grandes riquezas");
+                view.showIncursionResult(pillageIncursion.completeQuest());
+            }
+            case 3->{
+                SmallIncursion smallIncursion = new SmallIncursion("La campamento de bandidos", "incursion que seguro que aporta tanto objetos baratos como un poco de oro");
+                view.showIncursionResult(smallIncursion.completeQuest());
+            }
+        }
+    }
     private BuyResponse buyProcess(int id) {
         Item item = repository.getItem(id);
         if (item == null) {

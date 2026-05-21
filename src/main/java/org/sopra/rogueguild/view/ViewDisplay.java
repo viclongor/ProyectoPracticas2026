@@ -21,6 +21,7 @@ public class ViewDisplay {
     private final StockView stockView;
     private final BuyResultView buyResultView;
     private final SellResultView sellResultView;
+    private final IncursionView incursionView;
 
 
     public ViewDisplay() {
@@ -34,6 +35,7 @@ public class ViewDisplay {
         this.stockView = new StockView(out);
         this.buyResultView = new BuyResultView(messages);
         this.sellResultView = new SellResultView(messages);
+        this.incursionView = new IncursionView(out);
     }
 
     public void landingPage() { banner.landingPage(); }
@@ -60,4 +62,6 @@ public class ViewDisplay {
         messages.showMessage("** EVENTO DEL MUNDO **");
         messages.showMessage(event.getDescription());
     }
+    public void showIncursions(){incursionView.displayAvailableIncursions();}
+    public void showIncursionResult(RewardBag rewardBag){incursionView.displayIncursionResults(rewardBag);}
 }
