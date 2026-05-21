@@ -18,4 +18,13 @@ public class Player {
     public boolean removeItem(Item item){
         return inventory.remove(item);
     }
+    public String showInventory(){
+        StringBuilder str = new StringBuilder("||    INVENTARIO     ||");
+        for(Item item : inventory){
+            str.append("\n");
+            str.append(item.toString());
+        }
+        return str.toString();
+    }
+
 }
