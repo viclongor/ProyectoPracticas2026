@@ -9,8 +9,20 @@ public class Player {
         this.name = name;
         this.gold = gold;
     }
-    public String getName() { return name; }
-    public int getGold() { return gold; }
-    public void buy(Item item) { this.gold -= item.getPrice(); this.inventory.add(item); }
-    public boolean addItem(Item item){return inventory.add(item);}
+    public String getName() {
+        return name;
+    }
+    public int getGold() {
+        return gold;
+    }
+    public void buy(Item item) {
+        this.gold -= item.getPrice();
+        this.inventory.add(item);
+    }
+    public boolean addItem(Item item){
+        return inventory.add(item);
+    }
+    public boolean removeItem(Item item){
+        return inventory.remove(item);
+    }
 }
