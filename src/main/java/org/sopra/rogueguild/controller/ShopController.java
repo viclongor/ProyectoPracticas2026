@@ -9,6 +9,7 @@ import org.sopra.rogueguild.repository.model.Incursiones.PillageIncursion;
 import org.sopra.rogueguild.repository.model.Incursiones.SmallIncursion;
 import org.sopra.rogueguild.repository.model.Item;
 import org.sopra.rogueguild.repository.model.Player;
+import org.sopra.rogueguild.repository.model.RewardBag;
 import org.sopra.rogueguild.view.ViewDisplay;
 import org.sopra.rogueguild.controller.dto.BuyResponse;
 import org.sopra.rogueguild.repository.model.WorldEvent;
@@ -67,19 +68,29 @@ public class ShopController {
         } while (opt != 0);
     }
     private void selectIncursion(int id){
+        RewardBag rewardBag = null;
         switch (id){
             case 1->{
                 ConquestIncursion conquestIncursion = new ConquestIncursion("El Santuario olvidado", "Ardua incursion que seguro que aporta objetos caros");
-                view.showIncursionResult(conquestIncursion.completeQuest());
+                rewardBag = conquestIncursion.completeQuest();
+                view.showIncursionResult(rewardBag);
+
             }
             case 2->{
                 PillageIncursion pillageIncursion = new PillageIncursion("La ciudad prohibida", "Ardua incursion que seguro que aporta grandes riquezas");
-                view.showIncursionResult(pillageIncursion.completeQuest());
+                rewardBag = pillageIncursion.completeQuest();
+                view.showIncursionResult(rewardBag);
+
             }
             case 3->{
                 SmallIncursion smallIncursion = new SmallIncursion("La campamento de bandidos", "incursion que seguro que aporta tanto objetos baratos como un poco de oro");
-                view.showIncursionResult(smallIncursion.completeQuest());
+                rewardBag = smallIncursion.completeQuest();
+                view.showIncursionResult(rewardBag);
             }
+        }
+        player.receiveGold(rewardBag.getGold());
+        if(rewardBag.getItem() != null){
+            player.addItem(rewardBag.getItem());
         }
     }
     private BuyResponse buyProcess(int id) {

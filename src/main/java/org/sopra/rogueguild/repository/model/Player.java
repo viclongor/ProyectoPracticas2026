@@ -14,7 +14,11 @@ public class Player {
     public List<Item> getInventory() { return inventory; }
 
     public void buy(Item item) { this.gold -= item.getPrice(); addItem(item); }
-    public void receiveGold(int amount) { this.gold += amount; }
+    public void receiveGold(int amount) {
+        if((this.gold + amount) <= 500){
+            this.gold += amount;
+        }
+    }
 
     public boolean addItem(Item item){
         return inventory.add(item);
