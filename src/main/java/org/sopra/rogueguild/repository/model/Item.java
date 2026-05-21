@@ -4,11 +4,13 @@ public abstract class Item {
     private String name;
     private int price;
     private ItemCategory category;
+    private final int basePrice;
 
     public Item(String name, int price, ItemCategory category) {
         this.name = name;
         this.price = price;
         this.category = category;
+        basePrice = price;
     }
 
     public String getName() { return name; }
