@@ -5,6 +5,8 @@ public abstract class Item {
     private int price;
     private ItemCategory category;
     private final int basePrice;
+    private int originalId;
+
 
     public Item(String name, int price, ItemCategory category) {
         this.name = name;
@@ -16,6 +18,8 @@ public abstract class Item {
     public String getName() { return name; }
     public int getPrice() { return price; }
     public int getBasePrice()           { return basePrice; }
+    public int getOriginalId()        { return originalId; }
+    public void setOriginalId(int id) { this.originalId = id; }
     public ItemCategory getCategory()   { return category; }
 
     public String toString() { return name + " (" + price + " oro)"; }

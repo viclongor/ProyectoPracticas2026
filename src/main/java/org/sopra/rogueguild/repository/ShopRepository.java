@@ -31,8 +31,7 @@ public class ShopRepository {
         return stock;
     }
 
-    public void addItem(Item item) {
-        int newId = stock.size() + 1;
-        stock.put(newId, item);
+    public void addItem(int id, Item item) {
+        stock.put(id, item);
     }
 }

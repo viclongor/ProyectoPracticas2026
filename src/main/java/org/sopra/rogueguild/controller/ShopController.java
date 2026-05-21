@@ -62,6 +62,7 @@ public class ShopController {
         if (player.getGold() < item.getPrice()) {
             return BuyResponse.notEnoughGold(item, player.getGold());
         }
+        item.setOriginalId(id);
         player.buy(item);
         repository.removeItem(id);
         return BuyResponse.success(item);
@@ -86,7 +87,7 @@ public class ShopController {
         int goldReceived = calcSellPrice(item.getBasePrice());
         player.removeItem(item);
         player.receiveGold(goldReceived);
-        repository.addItem(item);
+        repository.addItem(item.getOriginalId(), item);
         return SellResponse.success(item, goldReceived);
     }
 

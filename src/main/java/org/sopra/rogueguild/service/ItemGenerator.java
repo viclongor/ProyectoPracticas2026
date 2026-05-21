@@ -7,19 +7,19 @@ import java.util.List;
 
 public class ItemGenerator {
     private final List<String> WEAPON_PREFIXES = List.of(
-        "Espada","Hacha","Daga","Lanza","Mandoble","Arco","Maza","Bastón"
+            "Espada","Hacha","Daga","Lanza","Mandoble","Arco","Maza","Bastón"
     );
     private final List<String> ARMOR_PREFIXES = List.of(
-        "Armadura","Cota","Peto","Coraza","Malla"
+            "Armadura","Cota","Peto","Coraza","Malla"
     );
     private final List<String> BOOTS_PREFIXES = List.of(
-        "Botas","Grebas","Sandalias","Escarpines"
+            "Botas","Grebas","Sandalias","Escarpines"
     );
     private final List<String> HELMET_PREFIXES = List.of(
-        "Yelmo","Casco","Celada","Capucha","Visera"
+            "Yelmo","Casco","Celada","Capucha","Visera"
     );
     private final List<String> POTION_PREFIXES  = List.of(
-        "Poción","Elixir","Brebaje","Ungüento","Tintura"
+            "Poción","Elixir","Brebaje","Ungüento","Tintura"
     );
 
     private final List<String> SUFFIXES = List.of(
@@ -28,7 +28,7 @@ public class ItemGenerator {
             "del dragón", "del fénix", "del caos", "del vacío", "del alba", "de la luna",
             "del norte", "de las ruinas", "del bosque maldito", "de las profundidades", "de la montaña"
     );
-//21 total sufixes
+    //21 total sufixes
     private ItemCategory category;
 
     private String name;
