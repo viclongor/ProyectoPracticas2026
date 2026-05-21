@@ -17,6 +17,7 @@ public abstract class Item {
 
     public String getName() { return name; }
     public int getPrice() { return price; }
+    public void setPrice(int price) { this.price = price; }
     public int getBasePrice()           { return basePrice; }
     public int getOriginalId()        { return originalId; }
     public void setOriginalId(int id) { this.originalId = id; }

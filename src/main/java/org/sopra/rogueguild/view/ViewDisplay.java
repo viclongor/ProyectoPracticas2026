@@ -11,6 +11,8 @@ import org.sopra.rogueguild.view.components.BuyResultView;
 import org.sopra.rogueguild.view.components.MessageView;
 import org.sopra.rogueguild.view.components.PlayerView;
 import org.sopra.rogueguild.view.components.StockView;
+import org.sopra.rogueguild.repository.model.WorldEvent;
+
 
 public class ViewDisplay {
     private final BannerView banner;
@@ -54,4 +56,8 @@ public class ViewDisplay {
         playerView.displayInventoryForSale(player);
     }
     public void sellResult(SellResponse r) { sellResultView.show(r); }
+    public void showWorldEvent(WorldEvent event) {
+        messages.showMessage("** EVENTO DEL MUNDO **");
+        messages.showMessage(event.getDescription());
+    }
 }

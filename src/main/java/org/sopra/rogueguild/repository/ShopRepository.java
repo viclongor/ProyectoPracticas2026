@@ -1,8 +1,9 @@
 package org.sopra.rogueguild.repository;
-import java.util.HashMap;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
-
+import org.sopra.rogueguild.repository.model.WorldEvent;
+import util.NumMalipulator;
 import org.sopra.rogueguild.repository.model.Armor;
 import org.sopra.rogueguild.repository.model.Item;
 import org.sopra.rogueguild.repository.model.Weapon;
@@ -33,5 +34,15 @@ public class ShopRepository {
 
     public void addItem(int id, Item item) {
         stock.put(id, item);
+    }
+    public void applyWorldEvent(WorldEvent event) {
+        for (Item item : stock.values()) {
+            boolean affected = event.isGlobal()
+                    || item.getCategory() == event.getAffectedCategory();
+            if (affected) {
+                int newPrice = NumMalipulator.roundTo5(item.getBasePrice() * event.getFactor());
+                item.setPrice(newPrice);
+            }
+        }
     }
 }
