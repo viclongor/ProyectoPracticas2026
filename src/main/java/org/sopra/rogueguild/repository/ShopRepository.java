@@ -57,12 +57,12 @@ public class ShopRepository {
             }
         }
     }
-    public void refreshShop(ItemGenerator itemGenerator){
-        for (int i=1;i<stock.size()+2;i++){
-            removeItem(i);
-        }
-        for (int i=1;i<=3;i++){
-            addItem(itemGenerator.generate());
+    public void refreshShop(ItemGenerator itemGenerator) {
+        stock.clear();
+        for (int i = 1; i <= 3; i++) {
+            Item item = itemGenerator.generate();
+            item.setOriginalId(i);
+            stock.put(i, item);
         }
     }
 }
