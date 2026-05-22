@@ -34,11 +34,11 @@ public abstract class Incursion {
         return potentialItem;
     }
     public int generateBigGoldReward(){
-        return NumUtil.generateInt(100,130);
+        return NumUtil.roundTo5(NumUtil.generateInt(100,130));
 
     }
     public int generateSmallGoldReward(){
-        return NumUtil.generateInt(10,30);
+        return NumUtil.roundTo5(NumUtil.generateInt(10,30));
 
     }
 
