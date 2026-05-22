@@ -9,6 +9,28 @@ import java.util.List;
 import static org.sopra.rogueguild.repository.model.Items.ItemCategory.*;
 
 public class ItemGenerator {
+    private final List<String> ORIGINAL_WEAPON_PREFIXES = new ArrayList<>( List.of(
+            "Espada","Hacha","Daga","Lanza","Mandoble","Arco","Maza","Bastón"
+    ));
+    private final List<String> ORIGINAL_ARMOR_PREFIXES = new ArrayList<>(List.of(
+            "Armadura","Cota","Peto","Coraza","Malla"
+    ));
+    private final List<String> ORIGINAL_BOOTS_PREFIXES = new ArrayList<>(List.of(
+            "Botas","Grebas","Sandalias","Escarpines"
+    ));
+    private final List<String> ORIGINAL_HELMET_PREFIXES = new ArrayList<>(List.of(
+            "Yelmo","Casco","Celada","Capucha","Visera"
+    ));
+    private final List<String> ORIGINAL_POTIONS_PREFIXES  = new ArrayList<>(List.of(
+            "Poción","Elixir","Brebaje","Ungüento","Tintura"
+    ));
+
+    private final List<String> ORIGINAL_SUFIXES = new ArrayList<>(List.of(
+            "de fuego", "de hielo", "del rayo", "de la tormenta", "de la sombra", "de la luz",
+            "de hierro", "de plata", "de obsidiana", "de acero rúnico", "de bronce antiguo",
+            "del dragón", "del fénix", "del caos", "del vacío", "del alba", "de la luna",
+            "del norte", "de las ruinas", "del bosque maldito", "de las profundidades", "de la montaña"
+    ));
     private static List<String> weaponPrefixes = new ArrayList<>( List.of(
             "Espada","Hacha","Daga","Lanza","Mandoble","Arco","Maza","Bastón"
     ));
@@ -42,7 +64,6 @@ public class ItemGenerator {
     }
 
     public Item generate(){
-        if(hasAvailableCategories()){
             category = genertateItemType();
             name = generateName();
             price = generateRandomPrice();
@@ -72,10 +93,6 @@ public class ItemGenerator {
                     return null;
                 }
             }
-        } else{
-            return null;
-        }
-
     }
 
     private int generateRandomPrice(){
@@ -112,34 +129,58 @@ public class ItemGenerator {
         switch (randNum){
             case 1 -> {
                 categoryAux = WEAPON;
-                removeEmptyList(weaponPrefixes,WEAPON);
+                refreshEmptyList(WEAPON);
             }
             case 2 -> {
                 categoryAux = ARMOR;
-                removeEmptyList(armorPrefixes,ARMOR);
+                refreshEmptyList(ARMOR);
             }
             case 3 -> {
                 categoryAux = BOOTS;
-                removeEmptyList(bootsPrefixes,BOOTS);
+                refreshEmptyList(BOOTS);
             }
             case 4 ->{
                 categoryAux = HELMET;
-                removeEmptyList(helmetPrefixes,HELMET);
+                refreshEmptyList(HELMET);
             }
             case 5 ->{
                 categoryAux = POTION;
-                removeEmptyList(potionPrefixes,POTION);
+                refreshEmptyList(POTION);
             }
         }
         return categoryAux;
     }
-    private void removeEmptyList(List<String> list, ItemCategory category){
-        if (list.isEmpty()){
-            availableCategories.remove(category);
-        }
-    }
+    private void refreshEmptyList(ItemCategory category){
 
-    private boolean hasAvailableCategories(){
-        return !availableCategories.isEmpty();
+        switch (category){
+            case WEAPON -> {
+                if(weaponPrefixes.isEmpty()){
+                    weaponPrefixes = new ArrayList(ORIGINAL_WEAPON_PREFIXES);
+                }
+            }
+            case ARMOR -> {
+                if(armorPrefixes.isEmpty()){
+                    armorPrefixes = new ArrayList(ORIGINAL_ARMOR_PREFIXES);
+                }
+            }
+            case BOOTS -> {
+                if(bootsPrefixes.isEmpty()){
+                    bootsPrefixes = new ArrayList(ORIGINAL_BOOTS_PREFIXES);
+                }
+            }
+            case HELMET -> {
+                if(helmetPrefixes.isEmpty()){
+                    helmetPrefixes = new ArrayList(ORIGINAL_HELMET_PREFIXES);
+                }
+            }
+            case POTION -> {
+                if(potionPrefixes.isEmpty()){
+                    potionPrefixes = new ArrayList(ORIGINAL_POTIONS_PREFIXES);
+                }
+            }
+        }
+        if(suffixes.isEmpty()){
+            suffixes = new ArrayList(ORIGINAL_SUFIXES);
+        }
     }
 }
