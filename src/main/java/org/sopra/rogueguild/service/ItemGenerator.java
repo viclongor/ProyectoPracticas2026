@@ -55,7 +55,7 @@ public class ItemGenerator {
     ));
 
     private ItemCategory category;
-    private static List<ItemCategory>availableCategories = new ArrayList<>(List.of(WEAPON, ARMOR, BOOTS, HELMET, POTION));
+    private static final List<ItemCategory>availableCategories = new ArrayList<>(List.of(WEAPON, ARMOR, BOOTS, HELMET, POTION));
     private String name;
     private int price;
     private int idCounter=3;
