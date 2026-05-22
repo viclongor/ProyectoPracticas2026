@@ -2,7 +2,7 @@ package org.sopra.rogueguild.repository.model.Items;
 
 public enum ItemCategory {
 
-    WEAPON(50,200),
+    WEAPON(50 ,200),
     ARMOR(20,100),
     POTION(20, 150),
     HELMET(100, 300),
