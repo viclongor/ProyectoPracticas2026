@@ -10,8 +10,8 @@ public enum ItemCategory {
     OTHERS(Integer.MIN_VALUE, Integer.MAX_VALUE);
 
 
-    int minPrice;
-    int maxPrice;
+    final int minPrice;
+    final int maxPrice;
 
     ItemCategory(int minPrice, int maxPrice){
         this.minPrice = minPrice;
