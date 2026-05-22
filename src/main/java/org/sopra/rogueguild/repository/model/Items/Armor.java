@@ -8,4 +8,18 @@ public class Armor extends Item {
     super(idOriginal,name, price, ItemCategory.ARMOR);
     this.shield = shield;
   }
+
+  public int getShield() {
+    return shield;
+  }
+
+  public void setShield(int shield) {
+    this.shield = shield;
+  }
+
+  @Override
+  public String toString() {
+    return getName() + " (" + getPrice() + " oro) Armadura: "+ getShield();
+  }
+
 }

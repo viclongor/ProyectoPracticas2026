@@ -63,7 +63,7 @@ public class ItemGenerator {
             }
             case POTION -> {
 
-                return new Potion(idCounter,name, price,"test",(int) NumUtil.generate(5,100));
+                return new Potion(idCounter,name, price,"<PLACE_HOLDER>",(int) NumUtil.generate(5,100));
             }
             default -> {
                 return null;

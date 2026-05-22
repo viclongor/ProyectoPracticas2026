@@ -91,10 +91,15 @@ public class MenuController {
                 rewardBag = smallIncursion.completeQuest();
                 view.showIncursionResult(rewardBag);
             }
+            default -> {
+                view.showMessage("Esa no es una incursion Valida");
+            }
         }
-        player.receiveGold(rewardBag.getGold());
-        if(rewardBag.getItem() != null){
-            player.addItem(rewardBag.getItem());
+        if(rewardBag != null){
+            player.receiveGold(rewardBag.getGold());
+            if(rewardBag.getItem() != null){
+                player.addItem(rewardBag.getItem());
+            }
         }
     }
     private BuyResponse buyProcess(int id) {

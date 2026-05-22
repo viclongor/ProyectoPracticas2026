@@ -8,4 +8,18 @@ public class Weapon extends Item {
         super(idOriginal,name, price, ItemCategory.WEAPON);
         this.damage = damage;
     }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    @Override
+    public String toString() {
+        return getName() + " (" + getPrice() + " oro) Ataque: "+ getDamage();
+    }
+
 }
