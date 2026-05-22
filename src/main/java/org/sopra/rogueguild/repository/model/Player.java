@@ -1,4 +1,6 @@
 package org.sopra.rogueguild.repository.model;
+import org.sopra.rogueguild.repository.model.Items.Item;
+
 import java.util.ArrayList;
 import java.util.List;
 public class Player {

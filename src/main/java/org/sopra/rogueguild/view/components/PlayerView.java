@@ -5,7 +5,7 @@ import java.util.List;
 
 import static org.sopra.rogueguild.view.utils.Ansi.*;
 
-import org.sopra.rogueguild.repository.model.Item;
+import org.sopra.rogueguild.repository.model.Items.Item;
 import org.sopra.rogueguild.repository.model.Player;
 
 public class PlayerView {

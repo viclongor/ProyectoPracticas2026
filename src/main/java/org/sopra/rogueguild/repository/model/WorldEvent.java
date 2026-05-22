@@ -1,5 +1,7 @@
 package org.sopra.rogueguild.repository.model;
 
+import org.sopra.rogueguild.repository.model.Items.ItemCategory;
+
 public class WorldEvent {
 
     private final ItemCategory affectedCategory; // null → global

@@ -1,4 +1,4 @@
-package org.sopra.rogueguild.repository.model;
+package org.sopra.rogueguild.repository.model.Items;
 
 public enum ItemCategory {
 

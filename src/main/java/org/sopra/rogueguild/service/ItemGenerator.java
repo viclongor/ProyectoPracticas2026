@@ -1,6 +1,6 @@
 package org.sopra.rogueguild.service;
 
-import org.sopra.rogueguild.repository.model.*;
+import org.sopra.rogueguild.repository.model.Items.*;
 import util.NumUtil;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class ItemGenerator {
 
     private String name;
     private int price;
-
+    private int idCounter=3;
     public ItemGenerator(){
 
     }
@@ -43,27 +43,27 @@ public class ItemGenerator {
         category = genertateItemType();
         name = generateName();
         price = generateRandomPrice();
-
+        idCounter = idCounter+1;
         switch (category){
             case WEAPON -> {
 
-                return new Weapon(name, price,(int) NumUtil.generate(5,100));
+                return new Weapon(idCounter,name, price,(int) NumUtil.generate(5,100));
             }
             case ARMOR -> {
 
-                return new Armor(name, price,(int) NumUtil.generate(5,100));
+                return new Armor(idCounter,name, price,(int) NumUtil.generate(5,100));
             }
             case BOOTS -> {
 
-                return new Boots(name, price,(int) NumUtil.generate(5,100));
+                return new Boots(idCounter,name, price,(int) NumUtil.generate(5,100));
             }
             case HELMET -> {
 
-                return new Helmet(name, price,(int) NumUtil.generate(5,100));
+                return new Helmet(idCounter,name, price,(int) NumUtil.generate(5,100));
             }
             case POTION -> {
 
-                return new Potion(name, price,"test",(int) NumUtil.generate(5,100));
+                return new Potion(idCounter,name, price,"test",(int) NumUtil.generate(5,100));
             }
             default -> {
                 return null;

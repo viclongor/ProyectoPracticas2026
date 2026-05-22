@@ -3,7 +3,7 @@ package org.sopra.rogueguild.view.components;
 import java.io.PrintStream;
 import java.util.Map;
 
-import org.sopra.rogueguild.repository.model.Item;
+import org.sopra.rogueguild.repository.model.Items.Item;
 
 public class StockView {
     private final PrintStream out;

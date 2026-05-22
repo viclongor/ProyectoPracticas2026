@@ -1,6 +1,6 @@
 package org.sopra.rogueguild.view.components;
 
-import org.sopra.rogueguild.repository.model.RewardBag;
+import org.sopra.rogueguild.repository.model.Items.RewardBag;
 
 import java.io.PrintStream;
 

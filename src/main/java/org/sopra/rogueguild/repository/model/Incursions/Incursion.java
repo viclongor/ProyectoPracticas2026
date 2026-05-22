@@ -1,6 +1,6 @@
 package org.sopra.rogueguild.repository.model.Incursions;
 
-import org.sopra.rogueguild.repository.model.Item;
+import org.sopra.rogueguild.repository.model.Items.Item;
 import org.sopra.rogueguild.service.ItemGenerator;
 import util.NumUtil;
 

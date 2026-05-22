@@ -1,10 +1,10 @@
-package org.sopra.rogueguild.repository.model;
+package org.sopra.rogueguild.repository.model.Items;
 
 public class Boots extends Item {
     private int speed;
 
-    public Boots(String name, int price, int speed) {
-        super(name, price, ItemCategory.BOOTS);
+    public Boots(int idOriginal,String name, int price, int speed) {
+        super(idOriginal,name, price, ItemCategory.BOOTS);
         this.speed = speed;
     }
 

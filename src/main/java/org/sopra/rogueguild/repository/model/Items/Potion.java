@@ -1,12 +1,12 @@
-package org.sopra.rogueguild.repository.model;
+package org.sopra.rogueguild.repository.model.Items;
 
-public class Potion extends Item{
+public class Potion extends Item {
 
     String effectName;
     int effect;
 
-    public Potion(String name, int price,String effectName ,int effect) {
-        super(name, price, ItemCategory.POTION);
+    public Potion(int idOriginal,String name, int price,String effectName ,int effect) {
+        super(idOriginal,name, price, ItemCategory.POTION);
         this.effectName = effectName;
         this.effect = effect;
     }

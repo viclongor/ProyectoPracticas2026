@@ -1,6 +1,6 @@
 package org.sopra.rogueguild.repository.model.Incursions;
 
-import org.sopra.rogueguild.repository.model.RewardBag;
+import org.sopra.rogueguild.repository.model.Items.RewardBag;
 import util.NumUtil;
 
 public class ConquestIncursion extends Incursion{

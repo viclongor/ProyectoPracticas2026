@@ -1,6 +1,6 @@
 package org.sopra.rogueguild.service;
 
-import org.sopra.rogueguild.repository.model.ItemCategory;
+import org.sopra.rogueguild.repository.model.Items.ItemCategory;
 import org.sopra.rogueguild.repository.model.WorldEvent;
 import util.NumUtil;
 

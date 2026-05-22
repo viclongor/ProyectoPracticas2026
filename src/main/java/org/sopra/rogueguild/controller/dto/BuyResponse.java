@@ -1,6 +1,6 @@
 package org.sopra.rogueguild.controller.dto;
 
-import org.sopra.rogueguild.repository.model.Item;
+import org.sopra.rogueguild.repository.model.Items.Item;
 
 public class BuyResponse {
     public enum Status { SUCCESS, NOT_FOUND, NOT_ENOUGH_GOLD }

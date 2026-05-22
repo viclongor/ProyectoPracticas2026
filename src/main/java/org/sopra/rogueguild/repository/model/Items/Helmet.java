@@ -1,11 +1,11 @@
-package org.sopra.rogueguild.repository.model;
+package org.sopra.rogueguild.repository.model.Items;
 
-public class Helmet extends Item{
+public class Helmet extends Item {
 
     int armor;
 
-    public Helmet(String name, int price, int armor) {
-        super(name, price, ItemCategory.HELMET);
+    public Helmet(int idOriginal,String name, int price, int armor) {
+        super(idOriginal,name, price, ItemCategory.HELMET);
         this.armor = armor;
 
     }

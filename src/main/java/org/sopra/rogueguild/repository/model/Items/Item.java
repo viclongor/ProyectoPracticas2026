@@ -1,4 +1,4 @@
-package org.sopra.rogueguild.repository.model;
+package org.sopra.rogueguild.repository.model.Items;
 
 public abstract class Item {
     private String name;
@@ -8,7 +8,8 @@ public abstract class Item {
     private int originalId;
 
 
-    public Item(String name, int price, ItemCategory category) {
+    public Item(int originalId,String name, int price, ItemCategory category) {
+        this.originalId = originalId;
         this.name = name;
         this.price = price;
         this.category = category;
