@@ -1,15 +1,14 @@
-package org.sopra.rogueguild.repository.model.Incursiones;
+package org.sopra.rogueguild.repository.model.Incursions;
 
 import org.sopra.rogueguild.repository.model.RewardBag;
 import util.NumUtil;
 
-public class ConquestIncursion extends Incursion{
-
-    public ConquestIncursion(String shortName, String description) {
+public class PillageIncursion extends Incursion{
+    public PillageIncursion(String shortName, String description) {
         super(shortName, description);
-        itemReward = generateBigItemReward();
-        if(hasGold()){
-            goldReward = generateSmallGoldReward();
+        goldReward = generateBigGoldReward();
+        if(hasItem()){
+            itemReward = generateSmallItemReward();
         }
     }
 
@@ -17,7 +16,7 @@ public class ConquestIncursion extends Incursion{
         return new RewardBag(goldReward, itemReward);
     }
 
-    public boolean hasGold(){
+    public boolean hasItem(){
         int chance = NumUtil.generateInt(1,4);
         if(chance==1){
             return true;

@@ -1,4 +1,4 @@
-package org.sopra.rogueguild.repository.model.Incursiones;
+package org.sopra.rogueguild.repository.model.Incursions;
 
 import org.sopra.rogueguild.repository.model.RewardBag;
 
