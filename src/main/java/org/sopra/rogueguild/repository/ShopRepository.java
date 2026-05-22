@@ -3,6 +3,7 @@ package org.sopra.rogueguild.repository;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.sopra.rogueguild.repository.model.WorldEvent;
+import org.sopra.rogueguild.service.ItemGenerator;
 import util.NumUtil;
 import org.sopra.rogueguild.repository.model.Items.Armor;
 import org.sopra.rogueguild.repository.model.Items.Item;
@@ -45,7 +46,8 @@ public class ShopRepository {
         int nextId = stock.keySet().stream().mapToInt(Integer::intValue).max().orElse(0) + 1;
         item.setOriginalId(nextId);
         stock.put(nextId, item);
-    }    public void applyWorldEvent(WorldEvent event) {
+    }
+    public void applyWorldEvent(WorldEvent event) {
         for (Item item : stock.values()) {
             boolean affected = event.isGlobal()
                     || item.getCategory() == event.getAffectedCategory();
@@ -53,6 +55,14 @@ public class ShopRepository {
                 int newPrice = NumUtil.roundTo5(item.getBasePrice() * event.getFactor());
                 item.setPrice(newPrice);
             }
+        }
+    }
+    public void refreshShop(ItemGenerator itemGenerator){
+        for (int i=1;i<stock.size()+2;i++){
+            removeItem(i);
+        }
+        for (int i=1;i<=3;i++){
+            addItem(itemGenerator.generate());
         }
     }
 }

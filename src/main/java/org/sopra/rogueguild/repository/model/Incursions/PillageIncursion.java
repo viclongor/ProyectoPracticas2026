@@ -1,11 +1,12 @@
 package org.sopra.rogueguild.repository.model.Incursions;
 
 import org.sopra.rogueguild.repository.model.Items.RewardBag;
+import org.sopra.rogueguild.service.ItemGenerator;
 import util.NumUtil;
 
 public class PillageIncursion extends Incursion{
-    public PillageIncursion(String shortName, String description) {
-        super(shortName, description);
+    public PillageIncursion(String shortName, String description, ItemGenerator itemGenerator) {
+        super(shortName, description, itemGenerator);
         goldReward = generateBigGoldReward();
         if(hasItem()){
             itemReward = generateSmallItemReward();

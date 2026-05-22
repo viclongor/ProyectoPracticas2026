@@ -10,6 +10,7 @@ import org.sopra.rogueguild.repository.model.Incursions.SmallIncursion;
 import org.sopra.rogueguild.repository.model.Items.Item;
 import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.repository.model.Items.RewardBag;
+import org.sopra.rogueguild.service.ItemGenerator;
 import org.sopra.rogueguild.view.ViewDisplay;
 import org.sopra.rogueguild.controller.dto.BuyResponse;
 import org.sopra.rogueguild.repository.model.WorldEvent;
@@ -22,6 +23,7 @@ public class MenuController {
     private final ShopRepository repository;
     private final Scanner sc;
     private final WorldEventGenerator eventGenerator;
+    private final ItemGenerator itemGenerator;
 
     public MenuController(Player p, ViewDisplay v, ShopRepository r) {
         this.player = p;
@@ -29,6 +31,7 @@ public class MenuController {
         this.repository = r;
         this.sc = new Scanner(System.in);
         this.eventGenerator = new WorldEventGenerator();
+        this.itemGenerator = new ItemGenerator();
     }
 
     public void start() {
@@ -75,19 +78,19 @@ public class MenuController {
         RewardBag rewardBag = null;
         switch (incursionId){
             case 1->{
-                ConquestIncursion conquestIncursion = new ConquestIncursion("El Santuario olvidado", "Ardua incursion que seguro que aporta objetos caros");
+                ConquestIncursion conquestIncursion = new ConquestIncursion("El Santuario olvidado", "Ardua incursion que seguro que aporta objetos caros",itemGenerator);
                 rewardBag = conquestIncursion.completeQuest();
                 view.showIncursionResult(rewardBag);
 
             }
             case 2->{
-                PillageIncursion pillageIncursion = new PillageIncursion("La ciudad prohibida", "Ardua incursion que seguro que aporta grandes riquezas");
+                PillageIncursion pillageIncursion = new PillageIncursion("La ciudad prohibida", "Ardua incursion que seguro que aporta grandes riquezas",itemGenerator);
                 rewardBag = pillageIncursion.completeQuest();
                 view.showIncursionResult(rewardBag);
 
             }
             case 3->{
-                SmallIncursion smallIncursion = new SmallIncursion("La campamento de bandidos", "incursion que seguro que aporta tanto objetos baratos como un poco de oro");
+                SmallIncursion smallIncursion = new SmallIncursion("La campamento de bandidos", "incursion que seguro que aporta tanto objetos baratos como un poco de oro",itemGenerator);
                 rewardBag = smallIncursion.completeQuest();
                 view.showIncursionResult(rewardBag);
             }
@@ -101,6 +104,7 @@ public class MenuController {
             if(rewardBag.getItem() != null){
                 player.addItem(rewardBag.getItem());
             }
+            repository.refreshShop(itemGenerator);
         }
     }
     private BuyResponse buyProcess(int id) {

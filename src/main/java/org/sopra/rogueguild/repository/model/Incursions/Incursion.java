@@ -9,17 +9,18 @@ public abstract class Incursion {
     String description;
     int goldReward;
     Item itemReward;
+    ItemGenerator itemGenerator;
 
-    public Incursion(String shortName,String description) {
+    public Incursion(String shortName,String description, ItemGenerator itemGenerator) {
         this.shortName = shortName;
         this.description = description;
         int goldReward = 0;
         Item itemReward = null;
+        this.itemGenerator = itemGenerator;
     }
 
     public Item generateBigItemReward(){
         Item  potentialItem;
-        ItemGenerator itemGenerator = new ItemGenerator();
         do{
             potentialItem = itemGenerator.generate();
         }while(potentialItem.getBasePrice()<50);
@@ -27,7 +28,6 @@ public abstract class Incursion {
     }
     public Item generateSmallItemReward(){
         Item  potentialItem;
-        ItemGenerator itemGenerator = new ItemGenerator();
         do{
             potentialItem = itemGenerator.generate();
         }while(potentialItem.getBasePrice()>50);

@@ -7,23 +7,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemGenerator {
-    private List<String> weaponPrefixes = new ArrayList<>( List.of(
+    private static List<String> weaponPrefixes = new ArrayList<>( List.of(
             "Espada","Hacha","Daga","Lanza","Mandoble","Arco","Maza","Bastón"
     ));
-    private List<String> armorPrefixes = new ArrayList<>(List.of(
+    private static List<String> armorPrefixes = new ArrayList<>(List.of(
             "Armadura","Cota","Peto","Coraza","Malla"
     ));
-    private List<String> bootsPrefixes = new ArrayList<>(List.of(
+    private static List<String> bootsPrefixes = new ArrayList<>(List.of(
             "Botas","Grebas","Sandalias","Escarpines"
     ));
-    private List<String> helmetPrefixes = new ArrayList<>(List.of(
+    private static List<String> helmetPrefixes = new ArrayList<>(List.of(
             "Yelmo","Casco","Celada","Capucha","Visera"
     ));
-    private List<String> potionPrefixes  = new ArrayList<>(List.of(
+    private static List<String> potionPrefixes  = new ArrayList<>(List.of(
             "Poción","Elixir","Brebaje","Ungüento","Tintura"
     ));
 
-    private List<String> suffixes = new ArrayList<>(List.of(
+    private static List<String> suffixes = new ArrayList<>(List.of(
             "de fuego", "de hielo", "del rayo", "de la tormenta", "de la sombra", "de la luz",
             "de hierro", "de plata", "de obsidiana", "de acero rúnico", "de bronce antiguo",
             "del dragón", "del fénix", "del caos", "del vacío", "del alba", "de la luna",
