@@ -93,6 +93,7 @@ public class MenuController {
             }
             default -> {
                 view.showMessage("Esa no es una incursion Valida");
+                return;
             }
         }
         if(rewardBag != null){
