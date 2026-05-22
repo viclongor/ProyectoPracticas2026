@@ -16,7 +16,6 @@ public class WorldEventGenerator {
             ItemCategory.POTION
     );
 
-    // {factor, pctChange}  — positivo = subida, negativo = bajada
     private static final double[][] VARIATIONS = {
             {1.10,  10},
             {1.20,  20},

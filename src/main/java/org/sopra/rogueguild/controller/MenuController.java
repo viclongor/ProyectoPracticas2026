@@ -130,7 +130,7 @@ public class MenuController {
         int goldReceived = calcSellPrice(item.getBasePrice());
         player.removeItem(item);
         player.receiveGold(goldReceived);
-        repository.addItem(item.getOriginalId(), item);
+        repository.addItem(item);
         return SellResponse.success(item, goldReceived);
     }
 

@@ -26,16 +26,26 @@ public class ShopRepository {
         return stock.get(id);
     }
 
-    public void removeItem(int id) { stock.remove(id); }
-
+    public void removeItem(int id) {
+        stock.remove(id);
+        Map<Integer, Item> reordered = new LinkedHashMap<>();
+        int newId = 1;
+        for (Item item : stock.values()) {
+            item.setOriginalId(newId);
+            reordered.put(newId, item);
+            newId++;
+        }
+        stock = reordered;
+    }
     public Map<Integer, Item> getAllStock() {
         return stock;
     }
 
-    public void addItem(int id, Item item) {
-        stock.put(id, item);
-    }
-    public void applyWorldEvent(WorldEvent event) {
+    public void addItem(Item item) {
+        int nextId = stock.keySet().stream().mapToInt(Integer::intValue).max().orElse(0) + 1;
+        item.setOriginalId(nextId);
+        stock.put(nextId, item);
+    }    public void applyWorldEvent(WorldEvent event) {
         for (Item item : stock.values()) {
             boolean affected = event.isGlobal()
                     || item.getCategory() == event.getAffectedCategory();
