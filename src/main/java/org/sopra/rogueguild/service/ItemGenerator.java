@@ -56,8 +56,6 @@ public class ItemGenerator {
 
     private ItemCategory category;
     private static final List<ItemCategory>availableCategories = new ArrayList<>(List.of(WEAPON, ARMOR, BOOTS, HELMET, POTION));
-    private String name;
-    private int price;
     private int idCounter=3;
     public ItemGenerator(){
 
@@ -65,29 +63,29 @@ public class ItemGenerator {
 
     public Item generate(){
             category = genertateItemType();
-            name = generateName();
-            price = generateRandomPrice();
+        String name = generateName();
+        int price = generateRandomPrice();
             idCounter = idCounter+1;
             switch (category){
                 case WEAPON -> {
 
-                    return new Weapon(idCounter,name, price,(int) NumUtil.generate(5,100));
+                    return new Weapon(idCounter, name, price,(int) NumUtil.generate(5,100));
                 }
                 case ARMOR -> {
 
-                    return new Armor(idCounter,name, price,(int) NumUtil.generate(5,100));
+                    return new Armor(idCounter, name, price,(int) NumUtil.generate(5,100));
                 }
                 case BOOTS -> {
 
-                    return new Boots(idCounter,name, price,(int) NumUtil.generate(5,100));
+                    return new Boots(idCounter, name, price,(int) NumUtil.generate(5,100));
                 }
                 case HELMET -> {
 
-                    return new Helmet(idCounter,name, price,(int) NumUtil.generate(5,100));
+                    return new Helmet(idCounter, name, price,(int) NumUtil.generate(5,100));
                 }
                 case POTION -> {
 
-                    return new Potion(idCounter,name, price,"<PLACE_HOLDER>",(int) NumUtil.generate(5,100));
+                    return new Potion(idCounter, name, price,"<PLACE_HOLDER>",(int) NumUtil.generate(5,100));
                 }
                 default -> {
                     return null;
@@ -155,32 +153,32 @@ public class ItemGenerator {
         switch (category){
             case WEAPON -> {
                 if(weaponPrefixes.isEmpty()){
-                    weaponPrefixes = new ArrayList(ORIGINAL_WEAPON_PREFIXES);
+                    weaponPrefixes = new ArrayList<>(ORIGINAL_WEAPON_PREFIXES);
                 }
             }
             case ARMOR -> {
                 if(armorPrefixes.isEmpty()){
-                    armorPrefixes = new ArrayList(ORIGINAL_ARMOR_PREFIXES);
+                    armorPrefixes = new ArrayList<>(ORIGINAL_ARMOR_PREFIXES);
                 }
             }
             case BOOTS -> {
                 if(bootsPrefixes.isEmpty()){
-                    bootsPrefixes = new ArrayList(ORIGINAL_BOOTS_PREFIXES);
+                    bootsPrefixes = new ArrayList<>(ORIGINAL_BOOTS_PREFIXES);
                 }
             }
             case HELMET -> {
                 if(helmetPrefixes.isEmpty()){
-                    helmetPrefixes = new ArrayList(ORIGINAL_HELMET_PREFIXES);
+                    helmetPrefixes = new ArrayList<>(ORIGINAL_HELMET_PREFIXES);
                 }
             }
             case POTION -> {
                 if(potionPrefixes.isEmpty()){
-                    potionPrefixes = new ArrayList(ORIGINAL_POTIONS_PREFIXES);
+                    potionPrefixes = new ArrayList<>(ORIGINAL_POTIONS_PREFIXES);
                 }
             }
         }
         if(suffixes.isEmpty()){
-            suffixes = new ArrayList(ORIGINAL_SUFIXES);
+            suffixes = new ArrayList<>(ORIGINAL_SUFIXES);
         }
     }
 }
