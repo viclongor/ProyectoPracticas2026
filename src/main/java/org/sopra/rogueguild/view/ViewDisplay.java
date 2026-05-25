@@ -18,6 +18,7 @@ public class ViewDisplay {
     private final BuyResultView buyResultView;
     private final SellResultView sellResultView;
     private final IncursionView incursionView;
+    private final QuestView questView;
 
 
     public ViewDisplay() {
@@ -32,6 +33,7 @@ public class ViewDisplay {
         this.buyResultView = new BuyResultView(messages);
         this.sellResultView = new SellResultView(messages);
         this.incursionView = new IncursionView(out);
+        this.questView = new QuestView(out);
     }
 
     public void landingPage() { banner.landingPage(); }
@@ -60,4 +62,5 @@ public class ViewDisplay {
     }
     public void showIncursions(){incursionView.displayAvailableIncursions();}
     public void showIncursionResult(RewardBag rewardBag){incursionView.displayIncursionResults(rewardBag);}
+    public void showQuests(){questView.displayAvailableQuests();}
 }

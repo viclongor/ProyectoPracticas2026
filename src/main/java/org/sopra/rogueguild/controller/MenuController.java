@@ -25,6 +25,7 @@ public class MenuController {
     private final WorldEventGenerator eventGenerator;
     private final ItemGenerator itemGenerator;
 
+
     public MenuController(Player p, ViewDisplay v, ShopRepository r) {
         this.player = p;
         this.view = v;
@@ -63,6 +64,11 @@ public class MenuController {
                     int incursionId = Input.getInt();
                     selectIncursion(incursionId);
                     break;
+                case 5:
+                    view.showQuests();
+                    int questId = Input.getInt();
+                    selectQuest(questId);
+                    break;
                 case 0:
                     view.quitMessage();
                     break;
@@ -73,6 +79,11 @@ public class MenuController {
             view.pressKeyMessage();
             sc.nextLine();
         } while (opt != 0);
+    }
+    private void selectQuest(int questId){
+        switch (questId){
+
+        }
     }
     private void selectIncursion(int incursionId){
         RewardBag rewardBag = null;
