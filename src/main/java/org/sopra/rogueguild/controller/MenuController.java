@@ -1,6 +1,10 @@
 package org.sopra.rogueguild.controller;
 
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
+
+import org.sopra.rogueguild.controller.dto.QuestResponse;
 import org.sopra.rogueguild.controller.dto.SellResponse;
 import java.util.List;
 import org.sopra.rogueguild.repository.ShopRepository;
@@ -8,8 +12,10 @@ import org.sopra.rogueguild.repository.model.Incursions.ConquestIncursion;
 import org.sopra.rogueguild.repository.model.Incursions.PillageIncursion;
 import org.sopra.rogueguild.repository.model.Incursions.SmallIncursion;
 import org.sopra.rogueguild.repository.model.Items.Item;
+import org.sopra.rogueguild.repository.model.Items.ItemCategory;
 import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.repository.model.Items.RewardBag;
+import org.sopra.rogueguild.repository.model.Quest;
 import org.sopra.rogueguild.service.ItemGenerator;
 import org.sopra.rogueguild.view.ViewDisplay;
 import org.sopra.rogueguild.controller.dto.BuyResponse;
@@ -24,6 +30,7 @@ public class MenuController {
     private final Scanner sc;
     private final WorldEventGenerator eventGenerator;
     private final ItemGenerator itemGenerator;
+    private final List<Quest> quests;
 
 
     public MenuController(Player p, ViewDisplay v, ShopRepository r) {
@@ -33,6 +40,23 @@ public class MenuController {
         this.sc = new Scanner(System.in);
         this.eventGenerator = new WorldEventGenerator();
         this.itemGenerator = new ItemGenerator();
+        this.quests = new ArrayList<>(List.of(
+                new Quest(
+                        "Danza de muerte",
+                        150,
+                        Map.of(ItemCategory.WEAPON, 2)
+                ),
+                new Quest(
+                        "Caballero del Fénix",
+                        300,
+                        Map.of(
+                                ItemCategory.WEAPON, 1,
+                                ItemCategory.HELMET, 1,
+                                ItemCategory.ARMOR, 1,
+                                ItemCategory.BOOTS, 1
+                        )
+                )
+        ));
     }
 
     public void start() {
@@ -65,9 +89,7 @@ public class MenuController {
                     selectIncursion(incursionId);
                     break;
                 case 5:
-                    view.showQuests();
-                    int questId = Input.getInt();
-                    selectQuest(questId);
+                    questProcess();
                     break;
                 case 0:
                     view.quitMessage();
@@ -158,5 +180,42 @@ public class MenuController {
     private int calcSellPrice(int basePrice) {
         int raw = (int) Math.round(basePrice * 0.8);
         return (int) (Math.round(raw / 5.0) * 5);
+    }
+
+    private void questProcess() {
+        List<Quest> pending = quests.stream()
+                .filter(q -> !q.isCompleted())
+                .collect(java.util.stream.Collectors.toList());
+
+        if (pending.isEmpty()) {
+            view.showQuestResult(QuestResponse.noQuests());
+            return;
+        }
+
+        view.showQuests(pending);
+        int choice = Input.getInt();
+
+        if (choice < 1 || choice > pending.size()) {
+            view.showQuestResult(QuestResponse.notFound());
+            return;
+        }
+
+        Quest quest = pending.get(choice - 1);
+
+        if (quest.complete(player)) {
+            view.showQuestResult(QuestResponse.success(quest));
+        } else {
+            Map<ItemCategory, Integer> missing = new java.util.HashMap<>();
+            for (Map.Entry<ItemCategory, Integer> entry : quest.getRequiredItems().entrySet()) {
+                ItemCategory category = entry.getKey();
+                int needed = entry.getValue();
+                long has = player.getInventory().stream()
+                        .filter(item -> item.getCategory() == category)
+                        .count();
+                int lack = needed - (int) has;
+                if (lack > 0) missing.put(category, lack);
+            }
+            view.showQuestResult(QuestResponse.requirementsNotMet(quest, missing));
+        }
     }
 }

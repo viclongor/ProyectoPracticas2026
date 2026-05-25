@@ -22,7 +22,7 @@ public abstract class Incursion {
     public Item generateBigItemReward(){
         Item  potentialItem;
         do{
-            potentialItem = itemGenerator.generate();
+            potentialItem = itemGenerator.generate(); 
         }while(potentialItem.getBasePrice()<50);
         return potentialItem;
     }

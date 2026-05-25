@@ -1,8 +1,12 @@
 package org.sopra.rogueguild.view;
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Map;
+
+import org.sopra.rogueguild.controller.dto.QuestResponse;
 import org.sopra.rogueguild.controller.dto.SellResponse;
 import org.sopra.rogueguild.repository.model.Items.RewardBag;
+import org.sopra.rogueguild.repository.model.Quest;
 import org.sopra.rogueguild.view.components.*;
 import org.sopra.rogueguild.repository.model.Items.Item;
 import org.sopra.rogueguild.repository.model.Player;
@@ -19,6 +23,7 @@ public class ViewDisplay {
     private final SellResultView sellResultView;
     private final IncursionView incursionView;
     private final QuestView questView;
+    private final QuestResultView questResultView;
 
 
     public ViewDisplay() {
@@ -34,6 +39,7 @@ public class ViewDisplay {
         this.sellResultView = new SellResultView(messages);
         this.incursionView = new IncursionView(out);
         this.questView = new QuestView(out);
+        this.questResultView = new QuestResultView(messages);
     }
 
     public void landingPage() { banner.landingPage(); }
@@ -62,5 +68,7 @@ public class ViewDisplay {
     }
     public void showIncursions(){incursionView.displayAvailableIncursions();}
     public void showIncursionResult(RewardBag rewardBag){incursionView.displayIncursionResults(rewardBag);}
-    public void showQuests(){questView.displayAvailableQuests();}
+
+    public void showQuests(List<Quest> quests) { questView.showQuests(quests); }
+    public void showQuestResult(QuestResponse r) { questResultView.show(r); }
 }

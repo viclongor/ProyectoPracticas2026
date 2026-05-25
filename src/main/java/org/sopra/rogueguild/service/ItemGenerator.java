@@ -105,6 +105,7 @@ public class ItemGenerator {
         priceAux = NumUtil.roundTo5(priceAux);
         return priceAux;
     }
+    
     private String generateName(){
         String nameAux = null;
         int randNumSufix = (int) NumUtil.generate(0,suffixes.size()-1);
