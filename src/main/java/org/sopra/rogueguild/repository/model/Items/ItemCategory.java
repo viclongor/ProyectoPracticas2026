@@ -7,7 +7,7 @@ public enum ItemCategory {
     POTION(20, 150),
     HELMET(100, 300),
     BOOTS(10, 40),
-    OTHERS(Integer.MIN_VALUE, Integer.MAX_VALUE);
+    OTHERS(250, 300);
 
 
     final int minPrice;

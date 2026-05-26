@@ -12,18 +12,29 @@ public class ItemGenerator {
     private final List<String> ORIGINAL_WEAPON_PREFIXES = new ArrayList<>( List.of(
             "Espada","Hacha","Daga","Lanza","Mandoble","Arco","Maza","Bastón"
     ));
+    private static List<String> weaponPrefixes = new ArrayList<>();
+
     private final List<String> ORIGINAL_ARMOR_PREFIXES = new ArrayList<>(List.of(
-            "Armadura","Cota","Peto","Coraza","Malla"
+            "Armadura","Cota","Peto","Coraza","Malla","Placas"
     ));
+    private static List<String> armorPrefixes = new ArrayList<>();
     private final List<String> ORIGINAL_BOOTS_PREFIXES = new ArrayList<>(List.of(
-            "Botas","Grebas","Sandalias","Escarpines"
+            "Botas","Grebas","Sandalias","Escarpines","Alpargata"
     ));
+    private static List<String> bootsPrefixes = new ArrayList<>();
     private final List<String> ORIGINAL_HELMET_PREFIXES = new ArrayList<>(List.of(
-            "Yelmo","Casco","Celada","Capucha","Visera"
+            "Yelmo","Casco","Celada","Capucha","Visera","Morrion"
     ));
+    private static List<String> helmetPrefixes = new ArrayList<>();
     private final List<String> ORIGINAL_POTIONS_PREFIXES  = new ArrayList<>(List.of(
-            "Poción","Elixir","Brebaje","Ungüento","Tintura"
+            "Poción","Elixir","Brebaje","Ungüento","Tintura","Jarabe"
     ));
+    private static List<String> potionPrefixes  = new ArrayList<>();
+
+    private final List<String> ORIGINAL_OTHER_PREFIXES = new ArrayList<>(List.of(
+            "Acero","Metal","Hierro","Piedra","Gema","Cristal","Pluma","Esencia"
+    ));
+    private static List<String> otherPrefixes = new ArrayList<>();
 
     private final List<String> ORIGINAL_SUFIXES = new ArrayList<>(List.of(
             "de fuego", "de hielo", "del rayo", "de la tormenta", "de la sombra", "de la luz",
@@ -31,35 +42,12 @@ public class ItemGenerator {
             "del dragón", "del fénix", "del caos", "del vacío", "del alba", "de la luna",
             "del norte", "de las ruinas", "del bosque maldito", "de las profundidades", "de la montaña"
     ));
-    private static List<String> weaponPrefixes = new ArrayList<>( List.of(
-            "Espada","Hacha","Daga","Lanza","Mandoble","Arco","Maza","Bastón"
-    ));
-    private static List<String> armorPrefixes = new ArrayList<>(List.of(
-            "Armadura","Cota","Peto","Coraza","Malla"
-    ));
-    private static List<String> bootsPrefixes = new ArrayList<>(List.of(
-            "Botas","Grebas","Sandalias","Escarpines"
-    ));
-    private static List<String> helmetPrefixes = new ArrayList<>(List.of(
-            "Yelmo","Casco","Celada","Capucha","Visera"
-    ));
-    private static List<String> potionPrefixes  = new ArrayList<>(List.of(
-            "Poción","Elixir","Brebaje","Ungüento","Tintura"
-    ));
-
-    private static List<String> suffixes = new ArrayList<>(List.of(
-            "de fuego", "de hielo", "del rayo", "de la tormenta", "de la sombra", "de la luz",
-            "de hierro", "de plata", "de obsidiana", "de acero rúnico", "de bronce antiguo",
-            "del dragón", "del fénix", "del caos", "del vacío", "del alba", "de la luna",
-            "del norte", "de las ruinas", "del bosque maldito", "de las profundidades", "de la montaña"
-    ));
+    private static List<String> suffixes = new ArrayList<>();
 
     private ItemCategory category;
-    private static final List<ItemCategory>availableCategories = new ArrayList<>(List.of(WEAPON, ARMOR, BOOTS, HELMET, POTION));
     private int idCounter=3;
-    public ItemGenerator(){
 
-    }
+    public ItemGenerator(){}
 
     public Item generate(){
             category = genertateItemType();
@@ -101,6 +89,7 @@ public class ItemGenerator {
             case BOOTS -> priceAux = (int) NumUtil.generate(BOOTS.getMinPrice() ,BOOTS.getMaxPrice());
             case HELMET -> priceAux = (int) NumUtil.generate(HELMET.getMinPrice() ,HELMET.getMaxPrice());
             case POTION -> priceAux = (int) NumUtil.generate(POTION.getMinPrice() ,POTION.getMaxPrice());
+            case OTHERS -> priceAux = (int) NumUtil.generate(OTHERS.getMinPrice() ,OTHERS.getMaxPrice());
         }
         priceAux = NumUtil.roundTo5(priceAux);
         return priceAux;
@@ -112,40 +101,40 @@ public class ItemGenerator {
 
         switch (category){
             case WEAPON -> nameAux = weaponPrefixes.remove( NumUtil.generateInt(0,weaponPrefixes.size()-1));
-            case ItemCategory.ARMOR -> nameAux = armorPrefixes.remove( NumUtil.generateInt(0,armorPrefixes.size()-1));
-            case ItemCategory.BOOTS -> nameAux = bootsPrefixes.remove(NumUtil.generateInt(0,bootsPrefixes.size()-1));
-            case ItemCategory.HELMET -> nameAux = helmetPrefixes.remove(NumUtil.generateInt(0,helmetPrefixes.size()-1));
-            case ItemCategory.POTION -> nameAux = potionPrefixes.remove(NumUtil.generateInt(0,potionPrefixes.size()-1));
+            case ARMOR -> nameAux = armorPrefixes.remove( NumUtil.generateInt(0,armorPrefixes.size()-1));
+            case BOOTS -> nameAux = bootsPrefixes.remove(NumUtil.generateInt(0,bootsPrefixes.size()-1));
+            case HELMET -> nameAux = helmetPrefixes.remove(NumUtil.generateInt(0,helmetPrefixes.size()-1));
+            case POTION -> nameAux = potionPrefixes.remove(NumUtil.generateInt(0,potionPrefixes.size()-1));
+            case OTHERS -> nameAux = otherPrefixes.remove(NumUtil.generateInt(0,otherPrefixes.size()-1));
         }
         nameAux += (" " + suffixes.remove(randNumSufix));
 
         return nameAux;
     }
+
+    // IN PROGRESS
     private ItemCategory genertateItemType(){
 
-        int randNum = (int) NumUtil.generate(1,availableCategories.size());
+        int randNum = (int) NumUtil.generate(1,100);
         ItemCategory categoryAux = null;
-        switch (randNum){
-            case 1 -> {
-                categoryAux = WEAPON;
-                refreshEmptyList(WEAPON);
-            }
-            case 2 -> {
-                categoryAux = ARMOR;
-                refreshEmptyList(ARMOR);
-            }
-            case 3 -> {
-                categoryAux = BOOTS;
-                refreshEmptyList(BOOTS);
-            }
-            case 4 ->{
-                categoryAux = HELMET;
-                refreshEmptyList(HELMET);
-            }
-            case 5 ->{
-                categoryAux = POTION;
-                refreshEmptyList(POTION);
-            }
+        if(randNum <= 19){
+            categoryAux = WEAPON;
+            refreshEmptyList(WEAPON);
+        } else if(randNum <= 38){
+            categoryAux = ARMOR;
+            refreshEmptyList(ARMOR);
+        } else if(randNum <= 57){
+            categoryAux = BOOTS;
+            refreshEmptyList(BOOTS);
+        } else if(randNum <= 76){
+            categoryAux = HELMET;
+            refreshEmptyList(HELMET);
+        } else if(randNum <= 95){
+            categoryAux = POTION;
+            refreshEmptyList(POTION);
+        } else {
+            categoryAux = OTHERS;
+            refreshEmptyList(OTHERS);
         }
         return categoryAux;
     }
@@ -175,6 +164,11 @@ public class ItemGenerator {
             case POTION -> {
                 if(potionPrefixes.isEmpty()){
                     potionPrefixes = new ArrayList<>(ORIGINAL_POTIONS_PREFIXES);
+                }
+            }
+            case OTHERS -> {
+                if(otherPrefixes.isEmpty()){
+                    otherPrefixes = new ArrayList<>(ORIGINAL_OTHER_PREFIXES);
                 }
             }
         }
