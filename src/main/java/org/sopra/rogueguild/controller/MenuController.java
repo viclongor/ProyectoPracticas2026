@@ -102,11 +102,6 @@ public class MenuController {
             sc.nextLine();
         } while (opt != 0);
     }
-    private void selectQuest(int questId){
-        switch (questId){
-
-        }
-    }
     private void selectIncursion(int incursionId){
         RewardBag rewardBag = null;
         switch (incursionId){

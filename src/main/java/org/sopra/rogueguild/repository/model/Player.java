@@ -21,6 +21,9 @@ public class Player {
             this.gold += amount;
         }
     }
+    public void setGold(int gold){
+        this.gold = gold;
+    }
 
     public boolean addItem(Item item){
         return inventory.add(item);
