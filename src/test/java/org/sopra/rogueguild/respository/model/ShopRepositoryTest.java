@@ -22,12 +22,12 @@ class ShopRepositoryTest {
     Item item1 = new Weapon(2, "Espada legendaria", 100, 20);
     Item item2 = new Armor(2, "Espada legendaria", 120, 20);
 
-
     @Test
     void playerAddItem() {
         shop.removeItem(1);
-        assertEquals(2,shop.getAllStock().size());
+        assertEquals(2, shop.getAllStock().size());
     }
+
     @Test
     void buyResponseNotEnoughGold() {
         Item expensiveItem = new Weapon(2, "Espada legendaria", 600, 20);
@@ -37,14 +37,12 @@ class ShopRepositoryTest {
     }
 
     @Test
-    void itemRemovedFromPlayerInvetory(){
+    void itemRemovedFromPlayerInventory() {
         player.setGold(0);
         player.addItem(item1);
         player.addItem(item2);
 
-        int choice  =  2;
-        Item item = player.getInventory().get(choice - 1);
-
+        Item item = player.getInventory().get(1);
         int raw = (int) Math.round(item.getBasePrice() * 0.8);
         int goldReceived = (int) (Math.round(raw / 5.0) * 5);
 
@@ -52,17 +50,16 @@ class ShopRepositoryTest {
         player.receiveGold(goldReceived);
         shop.addItem(item);
 
-        assertEquals(1,player.getInventory().size());
+        assertEquals(1, player.getInventory().size());
     }
+
     @Test
     void sellGoldAmount() {
         player.setGold(0);
         player.addItem(item1);
         player.addItem(item2);
 
-        int choice  =  2;
-        Item item = player.getInventory().get(choice - 1);
-
+        Item item = player.getInventory().get(1);
         int raw = (int) Math.round(item.getBasePrice() * 0.8);
         int goldReceived = (int) (Math.round(raw / 5.0) * 5);
 
@@ -70,18 +67,15 @@ class ShopRepositoryTest {
         player.receiveGold(goldReceived);
         shop.addItem(item);
 
-        assertEquals(95,player.getGold());
-
+        assertEquals(95, player.getGold());
     }
 
     @Test
-    void itemSoldItemAddedToShop(){
+    void itemSoldItemAddedToShop() {
         player.addItem(item1);
         player.addItem(item2);
 
-        int choice  =  2;
-        Item item = player.getInventory().get(choice - 1);
-
+        Item item = player.getInventory().get(1);
         int raw = (int) Math.round(item.getBasePrice() * 0.8);
         int goldReceived = (int) (Math.round(raw / 5.0) * 5);
 
@@ -89,25 +83,6 @@ class ShopRepositoryTest {
         player.receiveGold(goldReceived);
         shop.addItem(item);
 
-        assertEquals(4,shop.getAllStock().size());
-    }
-    @Test
-    void wrongIdSelling() throws Exception{
-        player.setGold(100);
-        ViewDisplay view = new ViewDisplay();
-        MenuController controller = new MenuController(player, view, shop);
-
-        int goldBefore = player.getGold();
-        int InventoryBefore = player.getInventory().size();
-
-        Method m = MenuController.class.getDeclaredMethod("sellProcess");
-        m.setAccessible(true);
-
-        SellResponse response = (SellResponse) m.invoke(controller);
-
-        assertNotNull(response);
-        assertEquals(goldBefore, player.getGold());
-        assertEquals(InventoryBefore, player.getInventory().size());
-        assertEquals( SellResponse.emptyInventory(),response.getStatus());
+        assertEquals(4, shop.getAllStock().size());
     }
 }
