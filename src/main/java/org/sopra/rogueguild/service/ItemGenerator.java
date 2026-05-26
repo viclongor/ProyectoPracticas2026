@@ -168,6 +168,7 @@ public class ItemGenerator {
                     potionPrefixes = new ArrayList<>(ORIGINAL_POTIONS_PREFIXES);
                 }
             }
+
             case OTHERS -> {
                 if(otherPrefixes.isEmpty()){
                     otherPrefixes = new ArrayList<>(ORIGINAL_OTHER_PREFIXES);

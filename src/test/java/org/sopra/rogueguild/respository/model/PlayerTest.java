@@ -3,6 +3,7 @@ package org.sopra.rogueguild.respository.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.sopra.rogueguild.controller.dto.BuyResponse;
 import org.sopra.rogueguild.repository.model.Items.Item;
 import org.sopra.rogueguild.repository.model.Items.Weapon;
 import org.sopra.rogueguild.repository.model.Player;
@@ -78,6 +79,7 @@ class PlayerTest {
     @Test
     void playerBuyItem() {
         player.buy(weapon);
-        assertEquals(0, player.getGold());
+        assertEquals(400, player.getGold());
     }
+    
 }
