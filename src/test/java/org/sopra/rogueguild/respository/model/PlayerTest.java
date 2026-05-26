@@ -68,4 +68,16 @@ class PlayerTest {
         player.addItem(weapon2);
         assertEquals(2, player.getInventory().size());
     }
+
+    @Test
+    void playerAddItem() {
+        player.addItem(weapon);
+        assertEquals(1, player.getInventory().size());
+    }
+
+    @Test
+    void playerBuyItem() {
+        player.buy(weapon);
+        assertEquals(0, player.getGold());
+    }
 }

@@ -74,6 +74,8 @@ public class ItemGenerator {
                 case POTION -> {
 
                     return new Potion(idCounter, name, price,"<PLACE_HOLDER>",(int) NumUtil.generate(5,100));
+                }case OTHERS -> {
+                    return new Others(idCounter, name, price);
                 }
                 default -> {
                     return null;
