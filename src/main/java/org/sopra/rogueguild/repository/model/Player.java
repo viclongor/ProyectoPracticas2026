@@ -1,7 +1,5 @@
 package org.sopra.rogueguild.repository.model;
-import org.sopra.rogueguild.repository.model.Items.Item;
-import org.sopra.rogueguild.repository.model.Items.ItemCategory;
-import org.sopra.rogueguild.repository.model.Items.Weapon;
+import org.sopra.rogueguild.repository.model.Items.*;
 
 import java.util.*;
 
@@ -32,8 +30,25 @@ public class Player {
     public int getGold() { return gold; }
     public List<Item> getInventory() { return inventory; }
     public Map<ItemCategory, List<Item>> getEquippedItems() { return equippedItems; }
-    public int getAttack
 
+    public int getAttack() {
+        return equippedItems.getOrDefault(ItemCategory.WEAPON, new ArrayList<>())
+                .stream()
+                .mapToInt(item -> ((Weapon) item).getDamage())
+                .sum();
+    }
+
+    public int getArmor() {
+        int armorVal = equippedItems.getOrDefault(ItemCategory.ARMOR, new ArrayList<>())
+                .stream()
+                .mapToInt(item -> ((Armor) item).getShield())
+                .sum();
+        int helmetVal = equippedItems.getOrDefault(ItemCategory.HELMET, new ArrayList<>())
+                .stream()
+                .mapToInt(item -> ((Helmet) item).getArmor())
+                .sum();
+        return armorVal + helmetVal;
+    }
 
     public void buy(Item item) { this.gold -= item.getPrice(); addItem(item); }
     public void receiveGold(int amount) {
@@ -101,5 +116,4 @@ public class Player {
         slots.add(item);
         return true;
     }
-
 }
