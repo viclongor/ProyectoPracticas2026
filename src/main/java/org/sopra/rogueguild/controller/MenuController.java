@@ -55,6 +55,18 @@ public class MenuController {
                                 ItemCategory.ARMOR, 1,
                                 ItemCategory.BOOTS, 1
                         )
+                ),
+                new Quest(
+                        "Daño maximo",
+                        300,
+                        120,
+                        0
+                ),
+                new Quest(
+                        "Equipamiento balanceado",
+                        300,
+                        100,
+                        50
                 )
         ));
     }
@@ -205,7 +217,13 @@ public class MenuController {
 
         if (quest.complete(player)) {
             view.showQuestResult(QuestResponse.success(quest));
-        } else {
+        } else if(quest.getRequiredItems() == null){
+            int misingAttack = quest.getRequiredAttack() - player.getAttack();
+            int misingArmor = quest.getRequiredArmor() - player.getArmor();
+
+            view.showQuestResult(QuestResponse.requirementsNotMet(quest, misingAttack, misingArmor));
+
+        } else{
             Map<ItemCategory, Integer> missing = new java.util.HashMap<>();
             for (Map.Entry<ItemCategory, Integer> entry : quest.getRequiredItems().entrySet()) {
                 ItemCategory category = entry.getKey();

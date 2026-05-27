@@ -9,12 +9,20 @@ public class QuestResponse {
 
     private final Status status;
     private final Quest quest;
-    private final Map<ItemCategory, Integer> missing;
+    private  Map<ItemCategory, Integer> missing;
+    private  int missingAttack;
+    private  int missingArmor;
 
     private QuestResponse(Status status, Quest quest, Map<ItemCategory, Integer> missing) {
         this.status = status;
         this.quest = quest;
         this.missing = missing;
+    }
+    private QuestResponse(Status status, Quest quest, int missingAttack, int missingArmor) {
+        this.status = status;
+        this.quest = quest;
+        this.missingAttack = missingAttack;
+        this.missingArmor = missingArmor;
     }
 
     public static QuestResponse success(Quest quest) {
@@ -22,6 +30,9 @@ public class QuestResponse {
     }
     public static QuestResponse requirementsNotMet(Quest quest, Map<ItemCategory, Integer> missing) {
         return new QuestResponse(Status.REQUIREMENTS_NOT_MET, quest, missing);
+    }
+    public static QuestResponse requirementsNotMet(Quest quest, int missingAttack, int missingArmor) {
+        return new QuestResponse(Status.REQUIREMENTS_NOT_MET, quest, missingAttack, missingArmor);
     }
     public static QuestResponse notFound() {
         return new QuestResponse(Status.NOT_FOUND, null, null);

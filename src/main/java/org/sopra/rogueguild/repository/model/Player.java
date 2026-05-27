@@ -32,7 +32,7 @@ public class Player {
     public int getGold() { return gold; }
     public List<Item> getInventory() { return inventory; }
     public Map<ItemCategory, List<Item>> getEquippedItems() { return equippedItems; }
-
+    public int getAttack
 
 
     public void buy(Item item) { this.gold -= item.getPrice(); addItem(item); }
@@ -101,4 +101,5 @@ public class Player {
         slots.add(item);
         return true;
     }
+
 }
