@@ -18,6 +18,8 @@ public class SellResultView {
                     messages.showMessage("[!] Tu inventario está vacío. No tienes nada que vender.");
             case NOT_FOUND ->
                     messages.showMessage("[!] Ese objeto no existe en tu inventario.");
+            case ITEM_EQUIPPED ->
+                    messages.showMessage("[!] Ese objeto está equipado. Desequípalo antes de venderlo.");
         }
     }
 }

@@ -91,6 +91,9 @@ public class MenuController {
                 case 5:
                     questProcess();
                     break;
+                case 6:
+                    equipProcess();
+                    break;
                 case 0:
                     view.quitMessage();
                     break;
@@ -165,6 +168,9 @@ public class MenuController {
             return SellResponse.notFound();
         }
         Item item = inventory.get(choice - 1);
+        if (player.isEquipped(item)) {
+            return SellResponse.itemEquipped();
+        }
         int goldReceived = calcSellPrice(item.getBasePrice());
         player.removeItem(item);
         player.receiveGold(goldReceived);
@@ -211,6 +217,27 @@ public class MenuController {
                 if (lack > 0) missing.put(category, lack);
             }
             view.showQuestResult(QuestResponse.requirementsNotMet(quest, missing));
+        }
+    }
+
+    private void equipProcess() {
+        if (player.getInventory().isEmpty()) {
+            view.showMessage("No tienes objetos en el inventario para equipar.");
+            return;
+        }
+        view.showEquipMenu(player);
+        int choice = Input.getInt();
+        if (choice < 1 || choice > player.getInventory().size()) {
+            view.showMessage("Opción no válida.");
+            return;
+        }
+        Item item = player.getInventory().get(choice - 1);
+        boolean equipped = player.equipItem(item);
+        if (equipped) {
+            view.showMessage("[+] Has equipado: " + item.getName());
+            view.showEquipped(player);
+        } else {
+            view.showMessage("[!] No puedes equipar ese tipo de objeto.");
         }
     }
 }

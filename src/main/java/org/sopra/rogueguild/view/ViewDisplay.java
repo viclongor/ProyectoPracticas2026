@@ -24,6 +24,7 @@ public class ViewDisplay {
     private final IncursionView incursionView;
     private final QuestView questView;
     private final QuestResultView questResultView;
+    private final EquipView equipView;
 
 
     public ViewDisplay() {
@@ -40,6 +41,7 @@ public class ViewDisplay {
         this.incursionView = new IncursionView(out);
         this.questView = new QuestView(out);
         this.questResultView = new QuestResultView(messages);
+        this.equipView = new EquipView(out);
     }
 
     public void landingPage() { banner.landingPage(); }
@@ -71,4 +73,7 @@ public class ViewDisplay {
 
     public void showQuests(List<Quest> quests) { questView.showQuests(quests); }
     public void showQuestResult(QuestResponse r) { questResultView.show(r); }
+
+    public void showEquipMenu(Player player) { equipView.showEquipMenu(player); }
+    public void showEquipped(Player player) { equipView.showEquipped(player); }
 }

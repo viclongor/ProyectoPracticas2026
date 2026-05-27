@@ -3,7 +3,7 @@ package org.sopra.rogueguild.controller.dto;
 import org.sopra.rogueguild.repository.model.Items.Item;
 
 public class SellResponse {
-    public enum Status { SUCCESS, EMPTY_INVENTORY, NOT_FOUND }
+    public enum Status { SUCCESS, EMPTY_INVENTORY, NOT_FOUND,ITEM_EQUIPPED  }
 
     private final Status status;
     private final Item item;
@@ -23,6 +23,9 @@ public class SellResponse {
     }
     public static SellResponse notFound() {
         return new SellResponse(Status.NOT_FOUND, null, 0);
+    }
+    public static SellResponse itemEquipped() {
+        return new SellResponse(Status.ITEM_EQUIPPED, null, 0);
     }
 
     public Status getStatus()    { return status; }
