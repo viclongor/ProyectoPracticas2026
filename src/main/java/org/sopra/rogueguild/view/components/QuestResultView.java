@@ -22,6 +22,15 @@ public class QuestResultView {
                 }
                 messages.showMessage(sb.toString().trim());
             }
+            case STATS_NOT_MET -> {
+                if(r.getMissingAttack()<=0){
+                    messages.showMessage("[!] No cumples los requisitos. Te faltan: "+r.getMissingArmor()+" puntos de armadura");
+                } else  if(r.getMissingArmor()<=0){
+                    messages.showMessage("[!] No cumples los requisitos. Te faltan: "+r.getMissingAttack()+" puntos de ataque");
+                }else{
+                    messages.showMessage("[!] No cumples los requisitos. Te faltan: "+r.getMissingAttack()+" puntos de ataque y "+r.getMissingArmor()+" puntos de armadura");
+                }
+            }
             case NOT_FOUND ->
                     messages.showMessage("[!] Esa misión no existe.");
             case NO_QUESTS ->

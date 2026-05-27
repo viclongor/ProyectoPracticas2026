@@ -41,7 +41,7 @@ public class Player {
     public int getArmor() {
         int armorVal = equippedItems.getOrDefault(ItemCategory.ARMOR, new ArrayList<>())
                 .stream()
-                .mapToInt(item -> ((Armor) item).getShield())
+                .mapToInt(item -> ((Armor) item).getArmor())
                 .sum();
         int helmetVal = equippedItems.getOrDefault(ItemCategory.HELMET, new ArrayList<>())
                 .stream()
@@ -116,4 +116,5 @@ public class Player {
         slots.add(item);
         return true;
     }
+
 }
