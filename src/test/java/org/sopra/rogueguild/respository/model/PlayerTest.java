@@ -103,11 +103,23 @@ class PlayerTest {
     }
 
     @Test
+    void equipItemRemovesItFromInventory(){
+
+        player.addItem(weapon);
+        player.equipItem(weapon);
+        assertEquals(0, player.getInventory().size());
+
+    }
+    @Test
     void checkItemEquipedWEAPONLimit(){
+        player.addItem(weapon);
+        player.addItem(weapon2);
+        player.addItem(weapon3);
         player.equipItem(weapon);
         player.equipItem(weapon2);
         player.equipItem(weapon3);
         assertEquals(2, player.getEquippedItems().get(ItemCategory.WEAPON).size());
+        assertEquals(weapon, player.getInventory().get(0));
     }
     @Test
     void checkItemEquipedARMORLimit(){
@@ -127,5 +139,4 @@ class PlayerTest {
         player.equipItem(helmet2);
         assertEquals(1, player.getEquippedItems().get(ItemCategory.HELMET).size());
     }
-
 }

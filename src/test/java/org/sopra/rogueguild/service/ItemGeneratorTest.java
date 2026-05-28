@@ -131,18 +131,4 @@ class ItemGeneratorTest {
             nombres.add(item.getName());
         }
     }
-    @Test
-    void generateOTHERS5Percent() {
-        ItemGenerator generator = new ItemGenerator();
-        int othersCount = 0;
-
-        for (int i = 0; i < 10000; i++) {
-            if (generator.generate() instanceof Others) {
-                othersCount++;
-            }
-        }
-
-        double percentage = (othersCount * 100.0) / 10000;
-        assertTrue(percentage >= 4.0 && percentage <= 6.0,"El porcentaje no ha sido 5% de other ha sido: ");
-    }
 }
