@@ -3,12 +3,13 @@ package org.sopra.rogueguild.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sopra.rogueguild.repository.model.Items.Item;
-import org.sopra.rogueguild.repository.model.Items.ItemCategory;
+import org.sopra.rogueguild.repository.model.Items.Others;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.sopra.rogueguild.repository.model.Items.ItemCategory.*;
 
 class ItemGeneratorTest {
 
@@ -59,8 +60,8 @@ class ItemGeneratorTest {
     void precioWeaponDentroDeRango() {
         for (int i = 0; i < 30; i++) {
             Item item = generator.generate();
-            if (item.getCategory() == ItemCategory.WEAPON) {
-                assertTrue(item.getPrice() >= 100 && item.getPrice() <= 300,
+            if (item.getCategory() == WEAPON) {
+                assertTrue(item.getPrice() >= WEAPON.getMinPrice() && item.getPrice() <= WEAPON.getMaxPrice(),
                         "Precio WEAPON fuera de rango: " + item.getPrice());
             }
         }
@@ -70,8 +71,8 @@ class ItemGeneratorTest {
     void precioArmorDentroDeRango() {
         for (int i = 0; i < 30; i++) {
             Item item = generator.generate();
-            if (item.getCategory() == ItemCategory.ARMOR) {
-                assertTrue(item.getPrice() >= 50 && item.getPrice() <= 200,
+            if (item.getCategory() == ARMOR) {
+                assertTrue(item.getPrice() >= ARMOR.getMinPrice() && item.getPrice() <= ARMOR.getMaxPrice(),
                         "Precio ARMOR fuera de rango: " + item.getPrice());
             }
         }
@@ -81,8 +82,8 @@ class ItemGeneratorTest {
     void precioBootsDentroDeRango() {
         for (int i = 0; i < 30; i++) {
             Item item = generator.generate();
-            if (item.getCategory() == ItemCategory.BOOTS) {
-                assertTrue(item.getPrice() >= 20 && item.getPrice() <= 100,
+            if (item.getCategory() == BOOTS) {
+                assertTrue(item.getPrice() >= BOOTS.getMinPrice() && item.getPrice() <= BOOTS.getMaxPrice(),
                         "Precio BOOTS fuera de rango: " + item.getPrice());
             }
         }
@@ -92,8 +93,8 @@ class ItemGeneratorTest {
     void precioHelmetDentroDeRango() {
         for (int i = 0; i < 30; i++) {
             Item item = generator.generate();
-            if (item.getCategory() == ItemCategory.HELMET) {
-                assertTrue(item.getPrice() >= 20 && item.getPrice() <= 150,
+            if (item.getCategory() == HELMET) {
+                assertTrue(item.getPrice() >= HELMET.getMinPrice() && item.getPrice() <= HELMET.getMaxPrice(),
                         "Precio HELMET fuera de rango: " + item.getPrice());
             }
         }
@@ -103,9 +104,19 @@ class ItemGeneratorTest {
     void precipoPotionDentroDeRango() {
         for (int i = 0; i < 30; i++) {
             Item item = generator.generate();
-            if (item.getCategory() == ItemCategory.POTION) {
-                assertTrue(item.getPrice() >= 10 && item.getPrice() <= 40,
+            if (item.getCategory() == POTION) {
+                assertTrue(item.getPrice() >= POTION.getMinPrice() && item.getPrice() <= POTION.getMaxPrice(),
                         "Precio POTION fuera de rango: " + item.getPrice());
+            }
+        }
+    }
+    @Test
+    void precipoOtherDentroDeRango() {
+        for (int i = 0; i < 30; i++) {
+            Item item = generator.generate();
+            if (item.getCategory() == OTHERS) {
+                assertTrue(item.getPrice() >= OTHERS.getMinPrice() && item.getPrice() <= OTHERS.getMaxPrice(),
+                        "Precio OTHER fuera de rango: " + item.getPrice());
             }
         }
     }
@@ -119,5 +130,19 @@ class ItemGeneratorTest {
                     "Nombre repetido: " + item.getName());
             nombres.add(item.getName());
         }
+    }
+    @Test
+    void generateOTHERS5Percent() {
+        ItemGenerator generator = new ItemGenerator();
+        int othersCount = 0;
+
+        for (int i = 0; i < 10000; i++) {
+            if (generator.generate() instanceof Others) {
+                othersCount++;
+            }
+        }
+
+        double percentage = (othersCount * 100.0) / 10000;
+        assertTrue(percentage >= 4.0 && percentage <= 6.0,"El porcentaje no ha sido 5% de other ha sido: ");
     }
 }
