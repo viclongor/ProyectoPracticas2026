@@ -8,10 +8,7 @@ import org.sopra.rogueguild.controller.MenuController;
 import org.sopra.rogueguild.controller.dto.BuyResponse;
 import org.sopra.rogueguild.controller.dto.SellResponse;
 import org.sopra.rogueguild.repository.ShopRepository;
-import org.sopra.rogueguild.repository.model.Items.Armor;
-import org.sopra.rogueguild.repository.model.Items.Item;
-import org.sopra.rogueguild.repository.model.Items.ItemCategory;
-import org.sopra.rogueguild.repository.model.Items.Weapon;
+import org.sopra.rogueguild.repository.model.Items.*;
 import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.view.ViewDisplay;
 
@@ -36,12 +33,12 @@ class PlayerTest {
         weapon = new Weapon(1, "Espada de fuego", 100, 10);
         weapon2 = new Weapon(2, "Espada de Hielo", 150, 20);
         weapon3 = new Weapon(1, "Espada de Rayo", 50, 5);
-        armor = new Weapon(1, "armadura de Rayo", 50, 5);
-        armor2 = new Weapon(1, "armadura de Dragon", 50, 5);
-        boots = new Weapon(1, "Botas de Rayo", 50, 5);
-        boots2 = new Weapon(1, "Botas de Dragon", 50, 5);
-        helmet = new Weapon(1, "yelmo de Rayo", 50, 5);
-        helmet2 = new Weapon(1, "yelmo de Dragon", 50, 5);
+        armor = new Armor(1, "armadura de Rayo", 50, 5);
+        armor2 = new Armor(1, "armadura de Dragon", 50, 5);
+        boots = new Boots(1, "Botas de Rayo", 50, 5);
+        boots2 = new Boots(1, "Botas de Dragon", 50, 5);
+        helmet = new Helmet(1, "yelmo de Rayo", 50, 5);
+        helmet2 = new Helmet(1, "yelmo de Dragon", 50, 5);
     }
 
     @Test
