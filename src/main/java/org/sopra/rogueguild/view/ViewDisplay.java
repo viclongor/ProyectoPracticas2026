@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.sopra.rogueguild.controller.dto.QuestResponse;
 import org.sopra.rogueguild.controller.dto.SellResponse;
+import org.sopra.rogueguild.repository.model.City;
 import org.sopra.rogueguild.repository.model.Items.RewardBag;
 import org.sopra.rogueguild.repository.model.Quest;
 import org.sopra.rogueguild.view.components.*;
@@ -25,7 +26,7 @@ public class ViewDisplay {
     private final QuestView questView;
     private final QuestResultView questResultView;
     private final EquipView equipView;
-
+    private final TravelView travelView;
 
     public ViewDisplay() {
         this(System.out, 59);
@@ -42,6 +43,7 @@ public class ViewDisplay {
         this.questView = new QuestView(out);
         this.questResultView = new QuestResultView(messages);
         this.equipView = new EquipView(out);
+        this.travelView = new TravelView(out);
     }
 
     public void landingPage() { banner.landingPage(); }
@@ -76,4 +78,8 @@ public class ViewDisplay {
 
     public void showEquipMenu(Player player) { equipView.showEquipMenu(player); }
     public void showEquipped(Player player) { equipView.showEquipped(player); }
+
+    public void showMap(Player player) { travelView.showMap(player); }
+    public void showCityList(List<City> cities) { travelView.showCityList(cities); }
+    public void showTravelResult(List<City> path) { travelView.showTravelResult(path); }
 }

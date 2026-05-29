@@ -1,21 +1,24 @@
 package org.sopra.rogueguild.repository.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class City {
-    List<City> connectedCities;
-    String name;
+    private final String name;
+    private final List<City> connectedCities;
 
-    public City(List<City> connectedCities, String name) {
-        this.connectedCities = connectedCities;
+    public City(String name) {
         this.name = name;
+        this.connectedCities = new ArrayList<>();
     }
 
-    public List<City> getConnectedCities() {return connectedCities;}
-    public String getName() {return name;}
-    public void setName(String name) {this.name = name;}
+    public String getName() { return name; }
+    public List<City> getConnectedCities() { return connectedCities; }
 
-    public boolean addConnectiontoCity(City city){
-        return connectedCities.add(city);
+    public void addConnection(City city) {
+        if (!connectedCities.contains(city)) {
+            connectedCities.add(city);
+            city.connectedCities.add(this);
+        }
     }
 }

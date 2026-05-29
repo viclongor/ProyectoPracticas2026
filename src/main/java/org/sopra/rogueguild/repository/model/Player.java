@@ -2,11 +2,15 @@ package org.sopra.rogueguild.repository.model;
 import org.sopra.rogueguild.repository.model.Items.*;
 
 import java.util.*;
+import java.util.LinkedList;
+import java.util.LinkedHashMap;
+import java.util.Queue;
 
 public class Player {
     private String name;
     private int gold;
     private List<Item> inventory = new ArrayList<>();
+    private City currentCity;
     private final Map<ItemCategory, List<Item>> equippedItems = new HashMap<>(Map.of(
             ItemCategory.WEAPON, new ArrayList<>(),
             ItemCategory.ARMOR,  new ArrayList<>(),
@@ -30,6 +34,8 @@ public class Player {
     public int getGold() { return gold; }
     public List<Item> getInventory() { return inventory; }
     public Map<ItemCategory, List<Item>> getEquippedItems() { return equippedItems; }
+    public City getCurrentCity() { return currentCity; }
+    public void setCurrentCity(City city) { this.currentCity = city; }
 
     public int getAttack() {
         return equippedItems.getOrDefault(ItemCategory.WEAPON, new ArrayList<>())
@@ -115,6 +121,37 @@ public class Player {
         inventory.remove(item);
         slots.add(item);
         return true;
+    }
+
+    public List<City> travelTo(City destination) {
+        if (currentCity == null || destination == null) return null;
+        if (currentCity == destination) return List.of(currentCity);
+
+        Map<City, City> visited = new LinkedHashMap<>();
+        Queue<City> queue = new LinkedList<>();
+        queue.add(currentCity);
+        visited.put(currentCity, null);
+
+        while (!queue.isEmpty()) {
+            City current = queue.poll();
+            if (current == destination) {
+                List<City> path = new ArrayList<>();
+                City step = destination;
+                while (step != null) {
+                    path.add(0, step);
+                    step = visited.get(step);
+                }
+                currentCity = destination;
+                return path;
+            }
+            for (City neighbor : current.getConnectedCities()) {
+                if (!visited.containsKey(neighbor)) {
+                    visited.put(neighbor, current);
+                    queue.add(neighbor);
+                }
+            }
+        }
+        return null;
     }
 
 }

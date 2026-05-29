@@ -8,6 +8,7 @@ import org.sopra.rogueguild.controller.dto.QuestResponse;
 import org.sopra.rogueguild.controller.dto.SellResponse;
 import java.util.List;
 import org.sopra.rogueguild.repository.ShopRepository;
+import org.sopra.rogueguild.repository.model.City;
 import org.sopra.rogueguild.repository.model.Incursions.ConquestIncursion;
 import org.sopra.rogueguild.repository.model.Incursions.PillageIncursion;
 import org.sopra.rogueguild.repository.model.Incursions.SmallIncursion;
@@ -31,9 +32,10 @@ public class MenuController {
     private final WorldEventGenerator eventGenerator;
     private final ItemGenerator itemGenerator;
     private final List<Quest> quests;
+    private final List<City> cities;
 
 
-    public MenuController(Player p, ViewDisplay v, ShopRepository r) {
+    public MenuController(Player p, ViewDisplay v, ShopRepository r,List<City> cities) {
         this.player = p;
         this.view = v;
         this.repository = r;
@@ -69,6 +71,7 @@ public class MenuController {
                         50
                 )
         ));
+        this.cities = cities;
     }
 
     public void start() {
@@ -105,6 +108,9 @@ public class MenuController {
                     break;
                 case 6:
                     equipProcess();
+                    break;
+                case 7:
+                    travelProcess();
                     break;
                 case 0:
                     view.quitMessage();
@@ -256,6 +262,23 @@ public class MenuController {
             view.showEquipped(player);
         } else {
             view.showMessage("[!] No puedes equipar ese tipo de objeto.");
+        }
+    }
+
+    private void travelProcess() {
+        view.showMap(player);
+        List<City> destinations = player.getCurrentCity().getConnectedCities();
+        view.showCityList(destinations);
+        int choice = Input.getInt();
+        if (choice < 1 || choice > destinations.size()) {
+            view.showMessage("Ciudad no válida.");
+            return;
+        }
+        City destination = destinations.get(choice - 1);
+        List<City> path = player.travelTo(destination);
+        view.showTravelResult(path);
+        if (path != null) {
+            view.showMessage("Has llegado a: " + player.getCurrentCity().getName());
         }
     }
 }
