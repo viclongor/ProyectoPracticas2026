@@ -13,26 +13,27 @@ import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.view.ViewDisplay;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.sopra.rogueguild.repository.model.Items.ItemCategory.*;
 
 class PlayerTest {
 
     private Player player;
-    private Item weapon;
-    private Item weapon2;
-    private Item weapon3;
-    private Item armor;
-    private Item armor2;
-    private Item boots;
-    private Item boots2;
-    private Item helmet;
-    private Item helmet2;
+    private Weapon weapon;
+    private Weapon weapon2;
+    private Weapon weapon3;
+    private Armor armor;
+    private Armor armor2;
+    private Boots boots;
+    private Boots boots2;
+    private Helmet helmet;
+    private Helmet helmet2;
 
     @BeforeEach
     void setUp() {
         player = new Player("Iñigo", 500);
         weapon = new Weapon(1, "Espada de fuego", 100, 10);
         weapon2 = new Weapon(2, "Espada de Hielo", 150, 20);
-        weapon3 = new Weapon(1, "Espada de Rayo", 50, 5);
+        weapon3 = new Weapon(1, "Espada de Rayo", 50, 50);
         armor = new Armor(1, "armadura de Rayo", 50, 5);
         armor2 = new Armor(1, "armadura de Dragon", 50, 5);
         boots = new Boots(1, "Botas de Rayo", 50, 5);
@@ -111,6 +112,42 @@ class PlayerTest {
 
     }
     @Test
+    void equipWeaponPutsItInWeaponSlot(){
+        player.addItem(weapon);
+        player.equipItem(weapon);
+        assertEquals(1, player.getEquippedItems().get(WEAPON).size());
+        assertEquals(0, player.getEquippedItems().get(ARMOR).size());
+        assertEquals(0, player.getEquippedItems().get(HELMET).size());
+        assertEquals(0, player.getEquippedItems().get(BOOTS).size());
+    }
+    @Test
+    void equipArmorPutsItInArmorSlot(){
+        player.addItem(armor);
+        player.equipItem(armor);
+        assertEquals(0, player.getEquippedItems().get(WEAPON).size());
+        assertEquals(1, player.getEquippedItems().get(ARMOR).size());
+        assertEquals(0, player.getEquippedItems().get(HELMET).size());
+        assertEquals(0, player.getEquippedItems().get(BOOTS).size());
+    }
+    @Test
+    void equipHelmetPutsItInHelmetSlot(){
+        player.addItem(helmet);
+        player.equipItem(helmet);
+        assertEquals(0, player.getEquippedItems().get(WEAPON).size());
+        assertEquals(0, player.getEquippedItems().get(ARMOR).size());
+        assertEquals(1, player.getEquippedItems().get(HELMET).size());
+        assertEquals(0, player.getEquippedItems().get(BOOTS).size());
+    }
+    @Test
+    void equipBootsPutsItInBootsSlot(){
+        player.addItem(boots);
+        player.equipItem(boots);
+        assertEquals(0, player.getEquippedItems().get(WEAPON).size());
+        assertEquals(0, player.getEquippedItems().get(ARMOR).size());
+        assertEquals(0, player.getEquippedItems().get(HELMET).size());
+        assertEquals(1, player.getEquippedItems().get(BOOTS).size());
+    }
+    @Test
     void checkItemEquipedWEAPONLimit(){
         player.addItem(weapon);
         player.addItem(weapon2);
@@ -118,7 +155,7 @@ class PlayerTest {
         player.equipItem(weapon);
         player.equipItem(weapon2);
         player.equipItem(weapon3);
-        assertEquals(2, player.getEquippedItems().get(ItemCategory.WEAPON).size());
+        assertEquals(2, player.getEquippedItems().get(WEAPON).size());
         assertEquals(weapon, player.getInventory().get(0));
     }
     @Test
@@ -138,5 +175,27 @@ class PlayerTest {
         player.equipItem(helmet);
         player.equipItem(helmet2);
         assertEquals(1, player.getEquippedItems().get(ItemCategory.HELMET).size());
+    }
+    @Test
+    void equipingWeaponRemovesLowestAttack(){
+        player.addItem(weapon);
+        player.equipItem(weapon);
+
+        player.addItem(weapon2);
+        player.equipItem(weapon2);
+
+        player.addItem(weapon3);
+
+        boolean isEquiped = player.equipItem(weapon3);
+
+        assertTrue(isEquiped);
+
+        assertTrue(player.isEquipped(weapon3));
+
+        assertTrue(player.getInventory().contains(weapon));
+
+        assertTrue(player.isEquipped(weapon2));
+
+        assertFalse(player.isEquipped(weapon));
     }
 }
