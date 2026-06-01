@@ -33,8 +33,6 @@ public class MenuController {
     private final ItemGenerator itemGenerator;
     private final List<Quest> quests;
     private final List<City> cities;
-    private WorldEvent event;
-
 
     public MenuController(Player p, ViewDisplay v, ShopRepository r,List<City> cities) {
         this.player = p;
@@ -73,11 +71,10 @@ public class MenuController {
                 )
         ));
         this.cities = cities;
-        event = null;
     }
 
     public void start() {
-        event = eventGenerator.generate();
+        WorldEvent event = eventGenerator.generate();
         repository.applyWorldEvent(event);
 
         int opt;
@@ -282,8 +279,5 @@ public class MenuController {
         if (path != null) {
             view.showMessage("Has llegado a: " + player.getCurrentCity().getName());
         }
-    }
-    public WorldEvent getCurrentWorldEvent(){
-        return event;
     }
 }
