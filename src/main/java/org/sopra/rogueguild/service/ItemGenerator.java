@@ -56,24 +56,19 @@ public class ItemGenerator {
             idCounter = idCounter+1;
             switch (category){
                 case WEAPON -> {
-
                     return new Weapon(idCounter, name, price,(int) NumUtil.generate(5,100));
                 }
                 case ARMOR -> {
-
                     return new Armor(idCounter, name, price,(int) NumUtil.generate(5,100));
                 }
                 case BOOTS -> {
-
                     return new Boots(idCounter, name, price,(int) NumUtil.generate(5,100));
                 }
                 case HELMET -> {
-
                     return new Helmet(idCounter, name, price,(int) NumUtil.generate(5,100));
                 }
                 case POTION -> {
-
-                    return new Potion(idCounter, name, price,"<PLACE_HOLDER>",(int) NumUtil.generate(5,100));
+                    return new Potion(idCounter, name, price,(int) NumUtil.generate(1,20));
                 }case OTHERS -> {
                     return new Others(idCounter, name, price);
                 }

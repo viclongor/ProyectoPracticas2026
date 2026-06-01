@@ -140,7 +140,7 @@ class MenuControllerTest {
     }
 
     @Test
-    void sellProcessEmptyInventory_returnsEmptyStatus() {
+    void sellProcessEmptyInventoryReturnsEmptyStatus() {
         SellResponse response = controller.sellProcess();
 
         assertEquals(SellResponse.Status.EMPTY_INVENTORY, response.getStatus());
@@ -149,7 +149,7 @@ class MenuControllerTest {
     }
 
     @Test
-    void sellProcessInvalidId_doesNotModifyInventoryOrGold() {
+    void sellProcessInvalidIdDoesNotModifyInventoryOrGold() {
         player.addItem(item1);
 
         System.setIn(new ByteArrayInputStream("99\n".getBytes()));
@@ -160,5 +160,10 @@ class MenuControllerTest {
         assertEquals(SellResponse.Status.NOT_FOUND, response.getStatus());
         assertEquals(500, player.getGold());
         assertTrue(player.getInventory().contains(item1));
+    }
+    @Test
+    void generatesWorldEvent(){
+        controller.start();
+        assertNotEquals(null, controller.getCurrentWorldEvent());
     }
 }

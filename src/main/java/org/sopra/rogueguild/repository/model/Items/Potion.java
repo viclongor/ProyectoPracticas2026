@@ -2,33 +2,23 @@ package org.sopra.rogueguild.repository.model.Items;
 
 public class Potion extends Item {
 
-    String effectName;
-    int effect;
+    int healPoint;
 
-    public Potion(int idOriginal,String name, int price,String effectName ,int effect) {
+    public Potion(int idOriginal,String name, int price,int healPoint) {
         super(idOriginal,name, price, ItemCategory.POTION);
-        this.effectName = effectName;
-        this.effect = effect;
+        this.healPoint = healPoint;
     }
 
-    public int getEffect() {
-        return effect;
+    public void setHealPoint(int healPoint) {
+        this.healPoint = healPoint;
     }
 
-    public void setEffect(int effect) {
-        this.effect = effect;
-    }
-
-    public String getEffectName() {
-        return effectName;
-    }
-
-    public void setEffectName(String effectName) {
-        this.effectName = effectName;
+    public int getHealPoint() {
+        return healPoint;
     }
 
     @Override
     public String toString() {
-        return getName() + " (" + getPrice() + " oro) Efecto: "+ getEffectName() + ": " + getEffect();
+        return getName() + " (" + getPrice() + " oro) Restaura: "+ getHealPoint() + " Puntos de vida";
     }
 }
