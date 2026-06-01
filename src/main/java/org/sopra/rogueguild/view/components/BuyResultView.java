@@ -13,8 +13,13 @@ public class BuyResultView {
         switch (r.getStatus()) {
         case SUCCESS ->
                 messages.showMessage("[+] " + r.getItem().getName() + " ya está en tu equipo!");
-        case NOT_FOUND ->
+        case NOT_FOUND ->{
+            if(r.getRequestedId() == Integer.MAX_VALUE){
+                messages.showMessage("[!] Por favor inserta un numero valido");
+            } else {
                 messages.showMessage("[!] Ese objeto (" + r.getRequestedId() + ") no existe en nuestra tienda.");
+            }
+        }
         case NOT_ENOUGH_GOLD ->
                 messages.showMessage("[!] No tienes suficiente oro. Te faltan " + r.getMissingGold() + " monedas.");
         }

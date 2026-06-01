@@ -10,20 +10,20 @@ import static org.junit.jupiter.api.Assertions.*;
 class ItemTest {
 
     @Test
-    void basePriceYPriceIgualesAlCrear() {
+    void basePriceYPriceEqualsOnCreate() {
         Item item = new Weapon(1, "Espada de fuego", 100, 10);
         assertEquals(item.getBasePrice(), item.getPrice());
     }
 
     @Test
-    void modificarPriceNoAlteraBasePrice() {
+    void modfyPriceDoesntAlterBasePrice() {
         Item item = new Weapon(1, "Espada de fuego", 100, 10);
         item.setPrice(200);
         assertEquals(100, item.getBasePrice());
     }
 
     @Test
-    void precioVentaCalculadoSobreBasePrice() {
+    void sellPriceCalculatedOnBasePrice() {
         Item item = new Weapon(1, "Espada de fuego", 100, 10);
         item.setPrice(200); // simulamos un evento del mundo
         int sellPrice = (int) (Math.round((item.getBasePrice() * 0.8) / 5.0) * 5);
@@ -31,7 +31,7 @@ class ItemTest {
     }
 
     @Test
-    void basePriceEsInmutableTrasCreacion() {
+    void basePriceDoesntChageAfterCreation() {
         Item item = new Weapon(1, "Espada de fuego", 100, 10);
         item.setPrice(50);
         item.setPrice(300);

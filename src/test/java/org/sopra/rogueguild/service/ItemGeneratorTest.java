@@ -21,26 +21,26 @@ class ItemGeneratorTest {
     }
 
     @Test
-    void generateDevuelveItemNoNulo() {
+    void generateReturnsItemNotNull() {
         Item item = generator.generate();
         assertNotNull(item);
     }
 
     @Test
-    void itemTieneCategoria() {
+    void itemHasCategory() {
         Item item = generator.generate();
         assertNotNull(item.getCategory());
     }
 
     @Test
-    void itemTieneNombreConPrefijoySufijo() {
+    void itemHasNameWithPrefixAndSufix() {
         Item item = generator.generate();
         assertNotNull(item.getName());
         assertTrue(item.getName().contains(" "));
     }
 
     @Test
-    void precioEsMultiploDeCinco() {
+    void priceIsMultipleOfFive() {
         for (int i = 0; i < 20; i++) {
             Item item = generator.generate();
             assertEquals(0, item.getPrice() % 5,
@@ -49,7 +49,7 @@ class ItemGeneratorTest {
     }
 
     @Test
-    void basePriceYPriceIgualesAlGenerar() {
+    void basePriceAndPriceEqualsOnGenerate() {
         for (int i = 0; i < 20; i++) {
             Item item = generator.generate();
             assertEquals(item.getBasePrice(), item.getPrice());
@@ -57,7 +57,7 @@ class ItemGeneratorTest {
     }
 
     @Test
-    void precioWeaponDentroDeRango() {
+    void priceWeaponInsideRange() {
         for (int i = 0; i < 30; i++) {
             Item item = generator.generate();
             if (item.getCategory() == WEAPON) {
@@ -68,7 +68,7 @@ class ItemGeneratorTest {
     }
 
     @Test
-    void precioArmorDentroDeRango() {
+    void priceArmorInsideRange() {
         for (int i = 0; i < 30; i++) {
             Item item = generator.generate();
             if (item.getCategory() == ARMOR) {
@@ -79,7 +79,7 @@ class ItemGeneratorTest {
     }
 
     @Test
-    void precioBootsDentroDeRango() {
+    void priceBootsInsideRange() {
         for (int i = 0; i < 30; i++) {
             Item item = generator.generate();
             if (item.getCategory() == BOOTS) {
@@ -90,7 +90,7 @@ class ItemGeneratorTest {
     }
 
     @Test
-    void precioHelmetDentroDeRango() {
+    void priceHelmetInsideRange() {
         for (int i = 0; i < 30; i++) {
             Item item = generator.generate();
             if (item.getCategory() == HELMET) {
@@ -101,7 +101,7 @@ class ItemGeneratorTest {
     }
 
     @Test
-    void precipoPotionDentroDeRango() {
+    void pricePotionInsideRange() {
         for (int i = 0; i < 30; i++) {
             Item item = generator.generate();
             if (item.getCategory() == POTION) {
@@ -111,7 +111,7 @@ class ItemGeneratorTest {
         }
     }
     @Test
-    void precipoOtherDentroDeRango() {
+    void priceOtherInsideRange() {
         for (int i = 0; i < 30; i++) {
             Item item = generator.generate();
             if (item.getCategory() == OTHERS) {
@@ -122,7 +122,7 @@ class ItemGeneratorTest {
     }
 
     @Test
-    void noSeRepiteNombreEnSesion() {
+    void doesntRepeatNamesInSesion() {
         List<String> nombres = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             Item item = generator.generate();

@@ -43,19 +43,19 @@ class PlayerTest {
     }
 
     @Test
-    void inventarioVacioAlCrear() {
+    void inventarioEmptyOnCreate() {
         assertTrue(player.getInventory().isEmpty());
     }
 
     @Test
-    void addItemAnadeAlInventario() {
+    void addItemAddsToInventory() {
         player.addItem(weapon);
         assertEquals(1, player.getInventory().size());
         assertTrue(player.getInventory().contains(weapon));
     }
 
     @Test
-    void addItemAnadeAlFinal() {
+    void addItemAddsToTheEnd() {
         Item weapon2 = new Weapon(2, "Daga de hielo", 50, 5);
         player.addItem(weapon);
         player.addItem(weapon2);
@@ -64,19 +64,19 @@ class PlayerTest {
     }
 
     @Test
-    void removeItemEliminaDelInventario() {
+    void removeItemRemovesFromInventory() {
         player.addItem(weapon);
         player.removeItem(weapon);
         assertTrue(player.getInventory().isEmpty());
     }
 
     @Test
-    void removeItemNoLanzaErrorSiNoExiste() {
+    void removeDoesntThrowError() {
         assertDoesNotThrow(() -> player.removeItem(weapon));
     }
 
     @Test
-    void removeItemEliminaPrimeraOcurrencia() {
+    void removeItemRemovesFirstOcurrence() {
         player.addItem(weapon);
         player.addItem(weapon);
         player.removeItem(weapon);
@@ -84,7 +84,7 @@ class PlayerTest {
     }
 
     @Test
-    void getInventoryDevuelveListaCompleta() {
+    void getInventoryReturnsCompleteList() {
         Item weapon2 = new Weapon(2, "Daga de hielo", 50, 5);
         player.addItem(weapon);
         player.addItem(weapon2);

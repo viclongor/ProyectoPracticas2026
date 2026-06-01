@@ -156,7 +156,7 @@ public class MenuController {
             repository.refreshShop(itemGenerator);
         }
     }
-    private BuyResponse buyProcess(int id) {
+     BuyResponse buyProcess(int id) {
         Item item = repository.getItem(id);
         if (item == null) {
             return BuyResponse.notFound(id);
@@ -170,7 +170,7 @@ public class MenuController {
         return BuyResponse.success(item);
     }
 
-    private SellResponse sellProcess() {
+     SellResponse sellProcess() {
         List<Item> inventory = player.getInventory();
         if (inventory.isEmpty()) {
             return SellResponse.emptyInventory();
