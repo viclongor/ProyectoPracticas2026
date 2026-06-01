@@ -49,7 +49,7 @@ class IncursionTest {
 
     @Test
     void pillageIncursionGoldRewardIsMultipleOfFive() {
-        for (int i = 0; i < 20; i++) { // repetimos por la aleatoriedad
+        for (int i = 0; i < 20; i++) {
             PillageIncursion incursion = new PillageIncursion("Pillaje", "Descripcion", itemGenerator);
             assertEquals(0, incursion.getGoldReward() % 5,
                     "goldReward debe ser múltiplo de 5, fue: " + incursion.getGoldReward());
