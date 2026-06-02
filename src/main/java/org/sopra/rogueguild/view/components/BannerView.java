@@ -27,7 +27,8 @@ public class BannerView {
         out.println("|| |  [4] Iniciar una incursion                    | ||");
         out.println("|| |  [5] Ver misiones disponibles               | ||");
         out.println("|| |  [6] Equipar objeto                            | ||");
-        out.println("|| |  [7] Viajar a otra ciudad                     | ||");
+        out.println("|| |  [7] Usar pociones                         | ||");
+        out.println("|| |  [8] Viajar a otra ciudad                     | ||");
         out.println("|| |" + c(Ansi.GRAY, "  [0] Salir                                    ") + "| ||");
         out.println("|| \\_______________________________________________/ ||");
         out.println(" \\___________________________________________________/");

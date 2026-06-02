@@ -11,6 +11,8 @@ public class Player {
     private int gold;
     private List<Item> inventory = new ArrayList<>();
     private City currentCity;
+    private int hitPoints = 20;
+    private static final int MAX_HP = 20;
     private final Map<ItemCategory, List<Item>> equippedItems = new HashMap<>(Map.of(
             ItemCategory.WEAPON, new ArrayList<>(),
             ItemCategory.ARMOR,  new ArrayList<>(),
@@ -36,6 +38,9 @@ public class Player {
     public Map<ItemCategory, List<Item>> getEquippedItems() { return equippedItems; }
     public City getCurrentCity() { return currentCity; }
     public void setCurrentCity(City city) { this.currentCity = city; }
+    public void spendGold(int amount) {
+        this.gold -= amount;
+    }
 
     public int getAttack() {
         return equippedItems.getOrDefault(ItemCategory.WEAPON, new ArrayList<>())
@@ -55,6 +60,8 @@ public class Player {
                 .sum();
         return armorVal + helmetVal;
     }
+
+    public int getHitPoints() { return hitPoints; }
 
     public void buy(Item item) { this.gold -= item.getPrice(); addItem(item); }
     public void receiveGold(int amount) {
@@ -152,5 +159,20 @@ public class Player {
             }
         }
         return null;
+    }
+
+    public void heal(int amount) {
+        hitPoints = Math.min(hitPoints + amount, MAX_HP);
+    }
+
+
+    public void usePotion(Potion potion) {
+        heal(potion.getHealPoint());
+        removeItem(potion);
+    }
+
+
+    public void takeDamage(int amount) {
+        hitPoints = Math.max(hitPoints - amount, 0);
     }
 }

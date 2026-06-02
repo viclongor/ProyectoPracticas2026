@@ -23,6 +23,7 @@ import org.sopra.rogueguild.controller.dto.BuyResponse;
 import org.sopra.rogueguild.repository.model.WorldEvent;
 import org.sopra.rogueguild.service.WorldEventGenerator;
 import util.Input;
+import org.sopra.rogueguild.repository.model.Items.Potion;
 
 public class MenuController {
     private final Player player;
@@ -112,6 +113,10 @@ public class MenuController {
                     equipProcess();
                     break;
                 case 7:
+                    usePotionProcess();
+                    break;
+
+                case 8:
                     travelProcess();
                     break;
                 case 0:
@@ -160,15 +165,22 @@ public class MenuController {
     }
      BuyResponse buyProcess(int id) {
         Item item = repository.getItem(id);
+
         if (item == null) {
             return BuyResponse.notFound(id);
         }
+
         if (player.getGold() < item.getPrice()) {
             return BuyResponse.notEnoughGold(item, player.getGold());
         }
+
         item.setOriginalId(id);
-        player.buy(item);
+
+        player.spendGold(item.getPrice());
         repository.removeItem(id);
+
+        player.addItem(item);
+
         return BuyResponse.success(item);
     }
 
@@ -285,5 +297,40 @@ public class MenuController {
     }
     public WorldEvent getCurrentWorldEvent(){
         return event;
+    }
+
+    private void usePotionProcess() {
+
+        List<Item> potions = player.getInventory().stream()
+                .filter(item -> item instanceof Potion)
+                .toList();
+
+        if (potions.isEmpty()) {
+            view.showMessage("No tienes pociones.");
+            return;
+        }
+
+        for (int i = 0; i < potions.size(); i++) {
+            Potion potion = (Potion) potions.get(i);
+
+            view.showMessage(
+                    (i + 1) + ". " +
+                            potion.getName() +
+                            " (+" + potion.getHealPoint() + " HP)"
+            );
+        }
+
+        int choice = Input.getInt();
+
+        if (choice < 1 || choice > potions.size()) {
+            view.showMessage("Opción no válida.");
+            return;
+        }
+
+        Potion potion = (Potion) potions.get(choice - 1);
+
+        player.usePotion(potion);
+
+        view.showMessage("Has usado " + potion.getName());
     }
 }

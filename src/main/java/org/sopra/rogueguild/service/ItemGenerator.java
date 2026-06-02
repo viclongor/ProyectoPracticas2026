@@ -68,7 +68,7 @@ public class ItemGenerator {
                     return new Helmet(idCounter, name, price,(int) NumUtil.generate(5,100));
                 }
                 case POTION -> {
-                    return new Potion(idCounter, name, price,(int) NumUtil.generate(1,20));
+                    return new Potion(idCounter, name, price, (int) NumUtil.generate(5, 100));
                 }case OTHERS -> {
                     return new Others(idCounter, name, price);
                 }
