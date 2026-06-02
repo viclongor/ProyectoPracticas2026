@@ -173,6 +173,6 @@ public class Player {
 
 
     public void takeDamage(int amount) {
-        hitPoints = Math.max(hitPoints - amount, 0);
+        hitPoints -= amount;
     }
 }

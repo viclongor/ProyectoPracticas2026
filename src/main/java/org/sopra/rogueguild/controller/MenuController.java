@@ -24,6 +24,7 @@ import org.sopra.rogueguild.repository.model.WorldEvent;
 import org.sopra.rogueguild.service.WorldEventGenerator;
 import util.Input;
 import org.sopra.rogueguild.repository.model.Items.Potion;
+import util.NumUtil;
 
 public class MenuController {
     private final Player player;
@@ -115,9 +116,10 @@ public class MenuController {
                 case 7:
                     usePotionProcess();
                     break;
-
                 case 8:
                     travelProcess();
+                    event = eventGenerator.generate();
+                    repository.applyWorldEvent(event);
                     break;
                 case 0:
                     view.quitMessage();
@@ -290,10 +292,29 @@ public class MenuController {
         }
         City destination = destinations.get(choice - 1);
         List<City> path = player.travelTo(destination);
+
         view.showTravelResult(path);
+
+
+        if(encounterChance()){
+            int damage = NumUtil.generateDamage(player.getArmor());
+            player.takeDamage(damage);
+            view.showMessage("Te han atacado por el camino has perdido: "+damage+" puntos de vida");
+            if(checkDeath()){
+                System.exit(0);
+            };
+        }
+
         if (path != null) {
             view.showMessage("Has llegado a: " + player.getCurrentCity().getName());
         }
+    }
+    boolean encounterChance(){
+        int encounterChance = NumUtil.generateInt(1,100);
+        return encounterChance <= 20;
+    }
+    boolean checkDeath(){
+        return player.getHitPoints() >=0;
     }
     public WorldEvent getCurrentWorldEvent(){
         return event;
