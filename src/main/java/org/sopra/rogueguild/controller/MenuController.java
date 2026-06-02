@@ -314,7 +314,7 @@ public class MenuController {
         return encounterChance <= 20;
     }
     boolean checkDeath(){
-        return player.getHitPoints() >=0;
+        return player.getHitPoints() <=0;
     }
     public WorldEvent getCurrentWorldEvent(){
         return event;
