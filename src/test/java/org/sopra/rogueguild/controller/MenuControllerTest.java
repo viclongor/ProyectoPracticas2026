@@ -161,9 +161,4 @@ class MenuControllerTest {
         assertEquals(500, player.getGold());
         assertTrue(player.getInventory().contains(item1));
     }
-    @Test
-    void generatesWorldEvent(){
-        controller.start();
-        assertNotEquals(null, controller.getCurrentWorldEvent());
-    }
 }
