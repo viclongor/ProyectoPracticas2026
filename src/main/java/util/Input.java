@@ -14,4 +14,8 @@ public class Input {
         return num;
 
     }
+    public static String getString(){
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
+    }
 }

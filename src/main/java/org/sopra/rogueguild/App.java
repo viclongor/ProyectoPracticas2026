@@ -5,6 +5,7 @@ import org.sopra.rogueguild.repository.ShopRepository;
 import org.sopra.rogueguild.repository.model.City;
 import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.view.ViewDisplay;
+import util.Input;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,9 @@ public class App {
     public static void main(String[] args) {
         ShopRepository repository = new ShopRepository();
         ViewDisplay view = new ViewDisplay();
-
-        Player player = new Player( "Iñigo Montolla", 500);
+        view.showMessage("Porfavor escribe el nombre del jugador");
+        String playerName = Input.getString();
+        Player player = new Player( playerName, 500);
         City aldea = new City("Aldea del Inicio");
         City bosque = new City("Bosque Oscuro");
         City ciudad = new City("Ciudad Amurallada");

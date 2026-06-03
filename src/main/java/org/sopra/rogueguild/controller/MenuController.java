@@ -301,6 +301,7 @@ public class MenuController {
             player.takeDamage(damage);
             view.showMessage("Te han atacado por el camino has perdido: "+damage+" puntos de vida");
             if(checkDeath()){
+                view.showMessage("GAME OVER");
                 System.exit(0);
             };
         }
