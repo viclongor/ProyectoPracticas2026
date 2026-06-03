@@ -1,6 +1,7 @@
 package org.sopra.rogueguild.repository.model.Incursions;
 
 import org.sopra.rogueguild.repository.model.Items.Item;
+import org.sopra.rogueguild.repository.model.Items.ItemCategory;
 import org.sopra.rogueguild.service.ItemGenerator;
 import util.NumUtil;
 
@@ -20,19 +21,20 @@ public abstract class Incursion {
     }
 
     public Item generateBigItemReward(){
-        Item  potentialItem;
-        do{
-            potentialItem = itemGenerator.generate(); 
-        }while(potentialItem.getBasePrice()<50);
+        Item potentialItem;
+        do {
+            potentialItem = itemGenerator.generate();
+        } while (potentialItem.getBasePrice() < 50 || potentialItem.getCategory() == ItemCategory.POTION);
         return potentialItem;
     }
     public Item generateSmallItemReward(){
-        Item  potentialItem;
-        do{
+        Item potentialItem;
+        do {
             potentialItem = itemGenerator.generate();
-        }while(potentialItem.getBasePrice()>50);
+        } while (potentialItem.getBasePrice() > 50 || potentialItem.getCategory() == ItemCategory.POTION);
         return potentialItem;
     }
+
     public int generateBigGoldReward(){
         return NumUtil.roundTo5(NumUtil.generateInt(100,130));
 

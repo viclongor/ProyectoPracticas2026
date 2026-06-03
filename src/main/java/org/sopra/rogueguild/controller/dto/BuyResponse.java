@@ -3,7 +3,7 @@ package org.sopra.rogueguild.controller.dto;
 import org.sopra.rogueguild.repository.model.Items.Item;
 
 public class BuyResponse {
-    public enum Status { SUCCESS, NOT_FOUND, NOT_ENOUGH_GOLD }
+    public enum Status { SUCCESS, NOT_FOUND, NOT_ENOUGH_GOLD, POTION_USED }
 
     private final Status status;
     private final Item item;
@@ -28,6 +28,10 @@ public class BuyResponse {
     public static BuyResponse notEnoughGold(Item item, int playerGold) {
         int missing = item.getPrice() - playerGold;
         return new BuyResponse(Status.NOT_ENOUGH_GOLD, item, missing, null);
+    }
+
+    public static BuyResponse potionUsed(Item item, int healAmount) {
+        return new BuyResponse(Status.POTION_USED, item, healAmount, null);
     }
 
     public Status getStatus() { return status; }

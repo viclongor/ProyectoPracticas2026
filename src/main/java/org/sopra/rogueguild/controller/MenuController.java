@@ -95,6 +95,7 @@ public class MenuController {
                 case 2:
                     view.displayStock(repository.getAllStock(), true);
                     int itemId = Input.getInt();
+                    if (itemId == 0) break;
                     BuyResponse buyResponse = buyProcess(itemId);
                     view.buyResult(buyResponse);
                     break;
@@ -114,9 +115,6 @@ public class MenuController {
                     equipProcess();
                     break;
                 case 7:
-                    usePotionProcess();
-                    break;
-                case 8:
                     travelProcess();
                     event = eventGenerator.generate();
                     repository.applyWorldEvent(event);
@@ -184,9 +182,13 @@ public class MenuController {
         player.spendGold(item.getPrice());
         repository.removeItem(id);
 
-        player.addItem(item);
-
-        return BuyResponse.success(item);
+         if (item.getCategory() == ItemCategory.POTION) {
+             player.heal(((Potion) item).getHealPoint());
+             return BuyResponse.potionUsed(item, ((Potion) item).getHealPoint());
+         } else {
+             player.addItem(item);
+         }
+         return BuyResponse.success(item);
     }
 
      SellResponse sellProcess() {
@@ -333,38 +335,4 @@ public class MenuController {
         return event;
     }
 
-    private void usePotionProcess() {
-
-        List<Item> potions = player.getInventory().stream()
-                .filter(item -> item instanceof Potion)
-                .toList();
-
-        if (potions.isEmpty()) {
-            view.showMessage("No tienes pociones.");
-            return;
-        }
-
-        for (int i = 0; i < potions.size(); i++) {
-            Potion potion = (Potion) potions.get(i);
-
-            view.showMessage(
-                    (i + 1) + ". " +
-                            potion.getName() +
-                            " (+" + potion.getHealPoint() + " HP)"
-            );
-        }
-
-        int choice = Input.getInt();
-
-        if (choice < 1 || choice > potions.size()) {
-            view.showMessage("Opción no válida.");
-            return;
-        }
-
-        Potion potion = (Potion) potions.get(choice - 1);
-
-        player.usePotion(potion);
-
-        view.showMessage("Has usado " + potion.getName());
-    }
 }

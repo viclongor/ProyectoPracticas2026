@@ -17,7 +17,9 @@ public class StockView {
         out.println("|| |           INVENTARIO DE LA TIENDA             | ||");
         out.println("|| | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ | ||");
         out.println("|| |                                               | ||");
-
+        if (inPurchase) {
+            out.println("|| |  [0] Volver                                   | ||");
+        }
         itemMap.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .forEach(e -> {
