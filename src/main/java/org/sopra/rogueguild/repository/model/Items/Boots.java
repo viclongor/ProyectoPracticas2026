@@ -18,6 +18,6 @@ public class Boots extends Item {
 
     @Override
     public String toString() {
-        return getName() + " (" + getPrice() + " oro) Velocidad: "+ getSpeed();
+        return getName() + " (" + getPrice() + " oro)";
     }
 }

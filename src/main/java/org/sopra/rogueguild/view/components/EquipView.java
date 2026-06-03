@@ -13,19 +13,20 @@ public class EquipView {
 
     public void showEquipMenu(Player player) {
         List<Item> inv = player.getInventory();
-        out.println("  ___________________________________________________");
-        out.println(" /  _______________________________________________  \\");
-        out.println("|| /                                               \\ ||");
-        out.println("|| |            EQUIPAR OBJETO                     | ||");
-        out.println("|| | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ | ||");
-        out.println("|| |                                               | ||");
+        out.println("  _____________________________________________________");
+        out.println(" /  __________________________________________________   \\");
+        out.println("|| /                                                   \\ ||");
+        out.println("|| |                  EQUIPAR OBJETO                   | ||");
+        out.println("|| | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~| ||");
+        out.println("|| |                                                   | ||");
+        out.println("|| |  [0] Volver                                       | ||");
         for (int i = 0; i < inv.size(); i++) {
             Item item = inv.get(i);
-            out.printf("|| |  [%d] %-38s    | ||%n", i + 1, item.getName());
+            out.printf("|| |  [%d] %-38s            | ||%n", i + 1, item);
         }
-        out.println("|| |                                               | ||");
-        out.println("|| \\_______________________________________________/ ||");
-        out.println(" \\___________________________________________________/");
+        out.println("|| |                                                   | ||");
+        out.println("|| \\_________________________________________________/ ||");
+        out.println(" \\_____________________________________________________/");
     }
 
     public void showEquipped(Player player) {

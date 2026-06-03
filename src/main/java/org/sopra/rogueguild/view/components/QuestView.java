@@ -18,6 +18,7 @@ public class QuestView {
         out.println("|| |           MISIONES DISPONIBLES                | ||");
         out.println("|| | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ | ||");
         out.println("|| |                                               | ||");
+        out.println("|| |  [0] Volver                                   | ||");
         for (int i = 0; i < quests.size(); i++) {
             Quest q = quests.get(i);
             out.printf("|| |  [%d] %-28s %4d oro    | ||%n",

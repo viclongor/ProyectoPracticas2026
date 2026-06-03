@@ -56,7 +56,7 @@ public class ItemGenerator {
             idCounter = idCounter+1;
             switch (category){
                 case WEAPON -> {
-                    return new Weapon(idCounter, name, price,(int) NumUtil.generate(5,70));
+                    return new Weapon(idCounter, name, price,(int) NumUtil.generate(5,25));
                 }
                 case ARMOR -> {
                     return new Armor(idCounter, name, price,(int) NumUtil.generate(5,15));

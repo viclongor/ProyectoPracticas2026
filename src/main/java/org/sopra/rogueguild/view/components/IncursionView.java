@@ -17,6 +17,7 @@ public class IncursionView {
                    || | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  | ||
                    || |                                                | ||
                    || |                                                | ||
+                   || |      [0] Volver                                | ||
                    || |      [1] Incursion de conquista                | ||
                    || |      [2] Incursion de saqueo                   | ||
                    || |      [3] Incursion menor                       | ||

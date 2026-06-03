@@ -64,14 +64,14 @@ public class MenuController {
                 new Quest(
                         "Daño maximo",
                         300,
-                        120,
+                        40,
                         0
                 ),
                 new Quest(
                         "Equipamiento balanceado",
                         300,
-                        100,
-                        50
+                        30,
+                        15
                 )
         ));
         this.cities = cities;
@@ -135,6 +135,9 @@ public class MenuController {
     private void selectIncursion(int incursionId){
         RewardBag rewardBag = null;
         switch (incursionId){
+            case 0 ->{
+                return;
+            }
             case 1->{
                 ConquestIncursion conquestIncursion = new ConquestIncursion("El Santuario olvidado", "Ardua incursion que seguro que aporta objetos caros",itemGenerator);
                 rewardBag = conquestIncursion.completeQuest();
@@ -230,7 +233,9 @@ public class MenuController {
         view.showQuests(pending);
         int choice = Input.getInt();
 
-        if (choice < 1 || choice > pending.size()) {
+        if (choice == 0){return;}
+
+        if (choice < 0 || choice > pending.size()) {
             view.showQuestResult(QuestResponse.notFound());
             return;
         }
@@ -267,7 +272,11 @@ public class MenuController {
         }
         view.showEquipMenu(player);
         int choice = Input.getInt();
-        if (choice < 1 || choice > player.getInventory().size()) {
+
+        if(choice == 0){
+            return;
+        }
+        if (choice < 0 || choice > player.getInventory().size()) {
             view.showMessage("Opción no válida.");
             return;
         }
@@ -286,7 +295,10 @@ public class MenuController {
         List<City> destinations = player.getCurrentCity().getConnectedCities();
         view.showCityList(destinations);
         int choice = Input.getInt();
-        if (choice < 1 || choice > destinations.size()) {
+        if (choice == 0){
+            return;
+        }
+        if (choice < 0 || choice > destinations.size()) {
             view.showMessage("Ciudad no válida.");
             return;
         }
