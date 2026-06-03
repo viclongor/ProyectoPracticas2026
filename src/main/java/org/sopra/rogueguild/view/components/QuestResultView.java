@@ -34,7 +34,7 @@ public class QuestResultView {
             case NOT_FOUND ->
                     messages.showMessage("[!] Esa misión no existe.");
             case NO_QUESTS ->
-                    messages.showMessage("[!] No hay misiones disponibles.");
+                    messages.showMessage("[!] Has completado todas las misiones disponibles.");
         }
     }
 }
